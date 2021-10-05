@@ -1,3 +1,11 @@
+local function default_prettier()
+  return {
+    exe = "prettier",
+    args = {"--stdin-filepath", vim.api.nvim_buf_get_name(0)},
+    stdin = true
+  }
+end
+
 require'formatter'.setup {
   logging = false,
   filetype = {
@@ -21,22 +29,10 @@ require'formatter'.setup {
       end
     },
     yaml = {
-      function()
-        return {
-          exe = "prettier",
-          args = {"--stdin-filepath", vim.api.nvim_buf_get_name(0)},
-          stdin = true 
-        }
-      end
+      default_prettier,
     },
     json = {
-      function()
-        return {
-          exe = "prettier",
-          args = {"--stdin-filepath", vim.api.nvim_buf_get_name(0)},
-          stdin = true 
-        }
-      end
+      default_prettier,
     },
     c = {
       function()
@@ -47,6 +43,9 @@ require'formatter'.setup {
           cwd = vim.fn.expand('%:p:h')
         }
       end
+    },
+    markdown = {
+      default_prettier,
     }
   }
 }
