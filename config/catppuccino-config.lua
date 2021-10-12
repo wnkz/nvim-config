@@ -10,18 +10,18 @@ catppuccino.setup {
     variables = "NONE",
   },
   integrations = {
-    gitsigns = true,
-    telescope = true,
-    nvimtree = {
-      enabled = true,
-      show_root = true,
-    },
-    indent_blankline = {
-      enabled = true,
-      colored_indent_levels = false,
-    },
     barbar = true,
     dashboard = true,
+    gitsigns = true,
+    indent_blankline = {
+      enabled = true,
+      colored_indent_levels = true,
+    },
+    nvimtree = {
+      enabled = true,
+      show_root = false,
+    },
+    telescope = true,
   }
 }
 

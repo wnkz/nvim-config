@@ -32,12 +32,17 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
 
+-- Add additional capabilities supported by nvim-cmp
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 local servers = { 'clangd', 'vimls', 'dockerls', 'terraformls' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
+    capabilities = capabilities,
     flags = {
       debounce_text_changes = 150,
     }
@@ -56,6 +61,7 @@ nvim_lsp['pyright'].setup {
     }
   },
   on_attach = on_attach,
+  capabilities = capabilities,
   flags = {
     debounce_text_changes = 150,
   }
@@ -97,11 +103,13 @@ nvim_lsp['yamlls'].setup {
     }
   },
   on_attach = on_attach,
+  capabilities = capabilities,
   flags = {
     debounce_text_changes = 150,
   }
 }
 
+-- sumneko_lua
 local system_name
 if vim.fn.has("mac") == 1 then
   system_name = "macOS"
@@ -145,6 +153,7 @@ require'lspconfig'.sumneko_lua.setup {
     },
   },
   on_attach = on_attach,
+  capabilities = capabilities,
   flags = {
     debounce_text_changes = 150,
   }

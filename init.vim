@@ -29,28 +29,32 @@ Plug 'hoob3rt/lualine.nvim'
 " LSP / Completion
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/nvim-compe'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-calc'
+Plug 'hrsh7th/cmp-emoji'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-nvim-lua'
+Plug 'hrsh7th/cmp-path'
+Plug 'ray-x/cmp-treesitter'
 
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'nvim-telescope/telescope-github.nvim'
 
-" Plug 'junegunn/fzf'
-" Plug 'junegunn/fzf.vim'
 call plug#end()
 
-source ~/.config/nvim/general/settings.vim
-source ~/.config/nvim/general/mappings.vim
-source ~/.config/nvim/general/theme.vim
-" source ~/.config/nvim/general/plug-config/nerdtree.vim
+source ~/.config/nvim/config/settings.vim
+source ~/.config/nvim/config/mappings.vim
+source ~/.config/nvim/config/theme.vim
 
 " LSP: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
 " LSP setup is called in lsp-config
-luafile ~/.config/nvim/lua/lsp/lsp-config.lua
+luafile ~/.config/nvim/config/lsp-config.lua
 
-luafile ~/.config/nvim/lua/settings.lua
-luafile ~/.config/nvim/lua/telescope-config.lua
-luafile ~/.config/nvim/lua/lualine-config.lua
-luafile ~/.config/nvim/lua/compe-config.lua
-luafile ~/.config/nvim/lua/formatter-config.lua
-luafile ~/.config/nvim/lua/catppuccino-config.lua
+luafile ~/.config/nvim/config/settings.lua
+luafile ~/.config/nvim/config/telescope-config.lua
+luafile ~/.config/nvim/config/lualine-config.lua
+luafile ~/.config/nvim/config/cmp-config.lua
+luafile ~/.config/nvim/config/formatter-config.lua
+luafile ~/.config/nvim/config/catppuccino-config.lua

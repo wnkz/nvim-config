@@ -1,3 +1,5 @@
+vim.opt.termguicolors = true
+
 -- treesitter
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "maintained",
@@ -27,41 +29,37 @@ require'nvim-treesitter.configs'.setup {
 }
 
 -- listchars
-vim.opt.listchars = {
-  tab = "»·",
-  space = "⋅",
-  trail = "⋅",
-  nbsp = "⋅",
-  -- eol = "↴",
-}
+vim.opt.list = true
+vim.opt.listchars:append("space:⋅")
+vim.opt.listchars:append("tab:»⋅")
+vim.opt.listchars:append("trail:⋅")
+vim.opt.listchars:append("nbsp:⋅")
+-- vim.opt.listchars:append("eol:↴")
 
 -- indent_blankline
 require('indent_blankline').setup {
-  char = '¦',
+  -- char = '|', -- ['|', '¦', '┆', '┊']
+  space_char_blankline = " ",
   show_end_of_line = false,
   show_current_context = true,
   use_treesitter = true,
   buftype_exclude = { 'terminal' },
   filetype_exclude = { 'dashboard' },
+  -- Use catppuccino colors
+  -- char_highlight_list = {
+  --   "IndentBlanklineIndent1",
+  --   "IndentBlanklineIndent2",
+  --   "IndentBlanklineIndent3",
+  --   "IndentBlanklineIndent4",
+  --   "IndentBlanklineIndent5",
+  --   "IndentBlanklineIndent6",
+  -- },
 }
 
 -- gitsigns
 require('gitsigns').setup()
 
--- statusbar - lightline
--- vim.g.lightline = {
---   colorscheme = 'onedark',
---   separator = { left = '', right = '' },
---   subseparator = { left = '', right = '' },
---   active = {
---     left = {
---       { 'mode', 'paste' },
---       { 'gitbranch', 'readonly', 'filename', 'modified' }
---     }
---   },
---   component_function = { gitbranch = 'fugitive#head' },
--- }
-
+-- nvim-tree
 require'nvim-tree'.setup {
   -- disables netrw completely
   disable_netrw       = true,
@@ -75,12 +73,21 @@ require'nvim-tree'.setup {
   auto_close          = true,
   -- opens the tree when changing/opening a new tab if the tree wasn't previously opened
   open_on_tab         = false,
+  -- hijacks new directory buffers when they are opened.
+  update_to_buf_dir   = {
+    -- enable the feature
+    enable = true,
+    -- allow to open the tree if it was previously closed
+    auto_open = true,
+  },
   -- hijack the cursor in the tree to put it at the start of the filename
   hijack_cursor       = true,
   -- updates the root directory of the tree on `DirChanged` (when your run `:cd` usually) 
   update_cwd          = true,
   -- show lsp diagnostics in the signcolumn
-  lsp_diagnostics     = false,
+  diagnostics = {
+    enable = false,
+  },
   -- update the focused file on `BufEnter`, un-collapses the folders recursively until it finds the file
   update_focused_file = {
     -- enables the feature
