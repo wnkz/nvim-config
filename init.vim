@@ -15,6 +15,7 @@ Plug 'mhartington/formatter.nvim'
 Plug 'lukas-reineke/indent-blankline.nvim' 
 Plug 'tpope/vim-commentary'
 Plug 'ellisonleao/glow.nvim'
+Plug 'mechatroner/rainbow_csv'
 
 " Theme
 Plug 'Pocco81/Catppuccino.nvim'
