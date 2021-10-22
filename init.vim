@@ -25,7 +25,8 @@ Plug 'Pocco81/Catppuccino.nvim'
 Plug 'glepnir/dashboard-nvim'
 
 " statusline
-Plug 'hoob3rt/lualine.nvim'
+" Plug 'hoob3rt/lualine.nvim'
+Plug 'nvim-lualine/lualine.nvim'
 
 " LSP / Completion
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
