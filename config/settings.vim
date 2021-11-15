@@ -10,7 +10,6 @@ set ignorecase
 set smartcase
 set updatetime=250
 set signcolumn=yes
-
 set nowrap
 
 " length of an actual \t character:
@@ -40,7 +39,6 @@ nmap <Leader>sl :<C-u>SessionLoad<CR>
 
 " nvim-tree
 " cf. ./settings.lua
-let g:nvim_tree_ignore = [ '.git', 'node_modules' ]
 let g:nvim_tree_highlight_opened_files = 1 "0 by default, will enable folder and file icon highlight for opened files/directories.
 let g:nvim_tree_root_folder_modifier = ':p:~' "This is the default. See :help filename-modifiers for more options
 let g:nvim_tree_add_trailing = 1 "0 by default, append a trailing slash to folder names

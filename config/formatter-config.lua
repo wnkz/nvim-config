@@ -12,15 +12,18 @@ require'formatter'.setup {
     python = {
       function()
         return {
-          exe = "black -",
-          args = {"--stdin-filename", vim.api.nvim_buf_get_name(0)},
+          exe = "black",
+          args = {
+            "-",
+            "--stdin-filename", vim.api.nvim_buf_get_name(0)},
           stdin = true
         }
       end,
       function()
         return {
-          exe = "isort -",
+          exe = "isort",
           args = {
+            "-",
             "--filename", vim.api.nvim_buf_get_name(0),
             "--profile", "black",
           },
@@ -41,6 +44,15 @@ require'formatter'.setup {
           args = {"--assume-filename", vim.api.nvim_buf_get_name(0)},
           stdin = true,
           cwd = vim.fn.expand('%:p:h')
+        }
+      end
+    },
+    lua = {
+      function()
+        return {
+          exe = "luafmt",
+          args = {"--indent-count", 2, "--stdin"},
+          stdin = true
         }
       end
     },

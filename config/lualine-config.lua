@@ -29,7 +29,7 @@ end
 
 require('lualine').setup {
   options = {
-    theme = 'catppuccino'
+    theme = 'onedark'
   },
   sections = {
     lualine_a = {'mode'},

@@ -1,7 +1,6 @@
-local catppuccino = require("catppuccino")
+local catppuccin = require("catppuccin")
 
-catppuccino.setup {
-  colorscheme = "dark_catppuccino",
+catppuccin.setup {
   styles = {
     comments = "NONE",
     functions = "NONE",
@@ -10,6 +9,10 @@ catppuccino.setup {
     variables = "NONE",
   },
   integrations = {
+    treesitter = true,
+    native_lsp = {
+      enabled = true
+    },
     barbar = true,
     dashboard = true,
     gitsigns = true,
@@ -22,7 +25,8 @@ catppuccino.setup {
       show_root = false,
     },
     telescope = true,
+    markdown = true,
   }
 }
 
-catppuccino.load()
+vim.cmd[[colorscheme catppuccin]]

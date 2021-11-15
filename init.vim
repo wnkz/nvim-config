@@ -18,14 +18,13 @@ Plug 'ellisonleao/glow.nvim'
 Plug 'mechatroner/rainbow_csv'
 
 " Theme
-Plug 'Pocco81/Catppuccino.nvim'
-" Plug 'joshdick/onedark.vim'
+Plug 'catppuccin/nvim'
+Plug 'navarasu/onedark.nvim'
 
 " Dashboard
 Plug 'glepnir/dashboard-nvim'
 
 " statusline
-" Plug 'hoob3rt/lualine.nvim'
 Plug 'nvim-lualine/lualine.nvim'
 
 " LSP / Completion
@@ -48,7 +47,7 @@ call plug#end()
 
 source ~/.config/nvim/config/settings.vim
 source ~/.config/nvim/config/mappings.vim
-source ~/.config/nvim/config/theme.vim
+source ~/.config/nvim/config/onedark-config.vim
 
 " LSP: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
 " LSP setup is called in lsp-config
@@ -59,4 +58,4 @@ luafile ~/.config/nvim/config/telescope-config.lua
 luafile ~/.config/nvim/config/lualine-config.lua
 luafile ~/.config/nvim/config/cmp-config.lua
 luafile ~/.config/nvim/config/formatter-config.lua
-luafile ~/.config/nvim/config/catppuccino-config.lua
+" luafile ~/.config/nvim/config/catppuccino-config.lua
