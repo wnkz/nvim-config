@@ -58,8 +58,7 @@ nvim_lsp["pyright"].setup {
       analysis = {
         -- autoSearchPaths = true,
         typeCheckingMode = "off",
-        useLibraryCodeForTypes = true,
-        venvPath = "~/.local/share/virtualenvs"
+        useLibraryCodeForTypes = true
       }
     }
   },
@@ -124,7 +123,7 @@ else
   print("Unsupported system for sumneko")
 end
 
-local sumneko_root_path = "/Users/wnkz/Development/github.com/sumneko/lua-language-server"
+local sumneko_root_path = "/Users/wnkz/Developer/github.com/sumneko/lua-language-server"
 local sumneko_binary = sumneko_root_path .. "/bin/" .. system_name .. "/lua-language-server"
 
 local runtime_path = vim.split(package.path, ";")
