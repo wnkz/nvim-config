@@ -56,9 +56,7 @@ nvim_lsp["pyright"].setup {
   settings = {
     python = {
       analysis = {
-        -- autoSearchPaths = true,
-        typeCheckingMode = "off",
-        useLibraryCodeForTypes = true
+        typeCheckingMode = "off"
       }
     }
   },
