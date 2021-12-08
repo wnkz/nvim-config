@@ -20,6 +20,8 @@ Plug 'mechatroner/rainbow_csv'
 " Theme
 Plug 'catppuccin/nvim'
 Plug 'navarasu/onedark.nvim'
+Plug 'sainnhe/edge'
+Plug 'sainnhe/everforest'
 
 " Dashboard
 Plug 'glepnir/dashboard-nvim'
@@ -58,7 +60,6 @@ call plug#end()
 
 source ~/.config/nvim/config/settings.vim
 source ~/.config/nvim/config/mappings.vim
-source ~/.config/nvim/config/onedark-config.vim
 
 " LSP: https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
 " LSP setup is called in lsp-config
