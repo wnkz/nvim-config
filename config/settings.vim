@@ -33,12 +33,12 @@ set foldexpr=nvim_treesitter#foldexpr()
 set nofoldenable
 
 " Theme
-" let g:onedark_style = 'darker'
-" colorscheme onedark
+let g:onedark_style = 'darker'
+colorscheme onedark
 " colorscheme edge
-set background=dark
-let g:everforest_background = 'hard'
-colorscheme everforest
+" set background=dark
+" let g:everforest_background = 'hard'
+" colorscheme everforest
 
 " Dashboard
 let g:dashboard_default_executive = 'telescope'
