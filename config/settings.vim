@@ -40,6 +40,9 @@ colorscheme onedark
 " let g:everforest_background = 'hard'
 " colorscheme everforest
 
+" Terminal
+tnoremap <Esc> <C-\><C-n> 
+
 " Dashboard
 let g:dashboard_default_executive = 'telescope'
 nmap <Leader>ss :<C-u>SessionSave<CR>
