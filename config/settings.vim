@@ -33,7 +33,9 @@ set foldexpr=nvim_treesitter#foldexpr()
 set nofoldenable
 
 " Theme
-let g:onedark_style = 'darker'
+let g:onedark_config = {
+  \ 'style': 'darker',
+\}
 colorscheme onedark
 " colorscheme edge
 " set background=dark
