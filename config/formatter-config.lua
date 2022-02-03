@@ -35,12 +35,10 @@ require "formatter".setup {
         }
       end
     },
-    yaml = {
-      default_prettier
-    },
-    json = {
-      default_prettier
-    },
+    yaml = {default_prettier},
+    json = {default_prettier},
+    javascript = {default_prettier},
+    html = {default_prettier},
     c = {
       function()
         return {
@@ -60,9 +58,7 @@ require "formatter".setup {
         }
       end
     },
-    markdown = {
-      default_prettier
-    },
+    markdown = {default_prettier},
     sh = {
       function()
         return {
