@@ -76,10 +76,7 @@ require "nvim-tree".setup {
   },
   filters = {
     dotfiles = false,
-    custom = {
-      ".git",
-      "node_modules"
-    }
+    custom = {".git", "node_modules"}
   },
   view = {
     width = 30,
@@ -93,3 +90,7 @@ require "nvim-tree".setup {
     }
   }
 }
+
+-- pretty-fold
+require("pretty-fold").setup {}
+require("pretty-fold.preview").setup()

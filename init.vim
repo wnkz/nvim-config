@@ -17,6 +17,7 @@ Plug 'tpope/vim-commentary'
 Plug 'ellisonleao/glow.nvim'
 Plug 'mechatroner/rainbow_csv'
 Plug 'ggandor/lightspeed.nvim'
+Plug 'anuvyklack/pretty-fold.nvim'
 
 " Theme
 Plug 'catppuccin/nvim'
