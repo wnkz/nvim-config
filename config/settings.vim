@@ -32,16 +32,6 @@ set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 set nofoldenable
 
-" Theme
-let g:onedark_config = {
-  \ 'style': 'darker',
-\}
-colorscheme onedark
-" colorscheme edge
-" set background=dark
-" let g:everforest_background = 'hard'
-" colorscheme everforest
-
 " Terminal
 tnoremap <Esc> <C-\><C-n> 
 

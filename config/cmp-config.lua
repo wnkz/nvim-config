@@ -62,9 +62,7 @@ cmp.setup {
   sources = cmp.config.sources(
     {
       {name = "nvim_lsp"},
-      {name = "luasnip"},
-      {name = "treesitter"},
-      {name = "nvim_lua"}
+      {name = "luasnip"}
     },
     {
       {name = "buffer"},
@@ -76,14 +74,7 @@ cmp.setup {
   formatting = {
     format = lspkind.cmp_format(
       {
-        with_text = true,
-        menu = ({
-          buffer = "[Buffer]",
-          nvim_lsp = "[LSP]",
-          luasnip = "[LuaSnip]",
-          nvim_lua = "[Lua]",
-          latex_symbols = "[Latex]"
-        })
+        mode = "symbol_text"
       }
     )
   }
@@ -113,3 +104,11 @@ cmp.setup.cmdline(
     )
   }
 )
+
+require("luasnip.loaders.from_vscode").load()
+
+local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({map_char = {tex = ""}}))
+
+-- add a lisp filetype (wrap my-function), FYI: Hardcoded = { "clojure", "clojurescript", "fennel", "janet" }
+cmp_autopairs.lisp[#cmp_autopairs.lisp + 1] = "racket"

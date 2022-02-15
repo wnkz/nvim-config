@@ -31,8 +31,7 @@ end
 
 require("lualine").setup {
   options = {
-    -- theme = 'everforest'
-    theme = "onedark"
+    theme = "onedarkpro"
   },
   sections = {
     lualine_a = {"mode"},

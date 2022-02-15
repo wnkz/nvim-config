@@ -34,9 +34,10 @@ nnoremap <silent> <leader>f :Format<CR>
 
 " NvimTree
 " nnoremap <C-n> :NvimTreeToggle<CR>
-nnoremap <C-n> :lua require'nvim-tree-barbar'.toggle_tree()<CR>
+" nnoremap <leader>n :NvimTreeFindFile<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
-nnoremap <leader>n :NvimTreeFindFile<CR>
+nnoremap <C-n> :lua require'nvim-tree-barbar'.toggle()<CR>
+nnoremap <leader>n :lua require'nvim-tree-barbar'.open()<CR>
 
 " barbar
 " Move to previous/next

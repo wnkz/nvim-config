@@ -1,12 +1,24 @@
 vim.opt.termguicolors = true
 
+-- theme
+require("onedarkpro").setup(
+  {
+    options = {
+      cursorline = true,
+      window_unfocussed_color = true
+    }
+  }
+)
+require("onedarkpro").load()
+
 -- treesitter
 require "nvim-treesitter.configs".setup {
   ensure_installed = "maintained",
+  sync_install = false,
   -- ignore_install = { "r" },
   highlight = {
     enable = true, -- false will disable the whole extension
-    -- disable = { "vim" },
+    disable = {"vim"},
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
     -- Using this option may slow down your editor, and you may see some duplicate highlights.
@@ -25,6 +37,9 @@ require "nvim-treesitter.configs".setup {
   indent = {
     enable = true
     -- disable = {"python", "yaml"}
+  },
+  autotag = {
+    enable = true
   }
 }
 
@@ -45,19 +60,15 @@ require("indent_blankline").setup {
   use_treesitter = true,
   buftype_exclude = {"terminal"},
   filetype_exclude = {"dashboard"}
-  -- Use catppuccino colors
-  -- char_highlight_list = {
-  --   "IndentBlanklineIndent1",
-  --   "IndentBlanklineIndent2",
-  --   "IndentBlanklineIndent3",
-  --   "IndentBlanklineIndent4",
-  --   "IndentBlanklineIndent5",
-  --   "IndentBlanklineIndent6",
-  -- },
 }
 
 -- gitsigns
 require("gitsigns").setup()
+
+-- barbar
+vim.g.bufferline = {
+  insert_at_end = true
+}
 
 -- nvim-tree
 require "nvim-tree".setup {
@@ -94,3 +105,8 @@ require "nvim-tree".setup {
 -- pretty-fold
 require("pretty-fold").setup {}
 require("pretty-fold.preview").setup()
+
+-- autopairs
+require("nvim-autopairs").setup {
+  check_ts = true
+}

@@ -3,6 +3,8 @@ call plug#begin()
 Plug 'nvim-lua/plenary.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+
 " Git / GitHub
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
@@ -20,10 +22,7 @@ Plug 'ggandor/lightspeed.nvim'
 Plug 'anuvyklack/pretty-fold.nvim'
 
 " Theme
-Plug 'catppuccin/nvim'
-Plug 'navarasu/onedark.nvim'
-Plug 'sainnhe/edge'
-Plug 'sainnhe/everforest'
+Plug 'olimorris/onedarkpro.nvim'
 
 " Dashboard
 Plug 'glepnir/dashboard-nvim'
@@ -32,17 +31,14 @@ Plug 'glepnir/dashboard-nvim'
 Plug 'nvim-lualine/lualine.nvim'
 
 " LSP / Completion
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'neovim/nvim-lspconfig'
+Plug 'ray-x/lsp_signature.nvim'
+Plug 'williamboman/nvim-lsp-installer'
 Plug 'hrsh7th/nvim-cmp'
 
-" For vsnip users.
-Plug 'hrsh7th/cmp-vsnip'
-Plug 'hrsh7th/vim-vsnip'
-
-" For luasnip users.
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'rafamadriz/friendly-snippets'
 
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-calc'
@@ -53,6 +49,8 @@ Plug 'hrsh7th/cmp-nvim-lua'
 Plug 'hrsh7th/cmp-path'
 Plug 'ray-x/cmp-treesitter'
 Plug 'onsails/lspkind-nvim'
+Plug 'windwp/nvim-autopairs'
+Plug 'windwp/nvim-ts-autotag'
 
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
@@ -72,4 +70,3 @@ luafile ~/.config/nvim/config/telescope-config.lua
 luafile ~/.config/nvim/config/lualine-config.lua
 luafile ~/.config/nvim/config/cmp-config.lua
 luafile ~/.config/nvim/config/formatter-config.lua
-" luafile ~/.config/nvim/config/catppuccino-config.lua

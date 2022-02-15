@@ -1,14 +1,13 @@
 local view = require "nvim-tree.view"
 
 local tree = {}
-tree.toggle_tree = function()
-  if view.win_open() then
-    require "nvim-tree.view".close()
+tree.toggle = function()
+  if view.is_visible() then
     require "bufferline.state".set_offset(0)
   else
     require "bufferline.state".set_offset(31, "FileTree")
-    require "nvim-tree".find_file(true)
   end
+  require "nvim-tree".toggle(true)
 end
 
 tree.open = function()
@@ -17,8 +16,8 @@ tree.open = function()
 end
 
 tree.close = function()
+  view.close()
   require "bufferline.state".set_offset(0)
-  require "nvim-tree.view".close()
 end
 
 return tree
