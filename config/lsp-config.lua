@@ -140,14 +140,13 @@ lsp_installer.on_server_ready(
   end
 )
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] =
-  vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics,
+vim.diagnostic.config(
   {
     virtual_text = true,
     signs = true,
     underline = false,
-    update_in_insert = false
+    update_in_insert = false,
+    severity_sort = false
   }
 )
 
