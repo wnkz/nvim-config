@@ -7,13 +7,13 @@ end
 
 local luasnip = require("luasnip")
 local lspkind = require("lspkind")
-local cmp = require "cmp"
+local cmp = require("cmp")
 
 cmp.setup {
   snippet = {
     -- REQUIRED - you must specify a snippet engine
     expand = function(args)
-      require("luasnip").lsp_expand(args.body)
+      luasnip.lsp_expand(args.body)
     end
   },
   mapping = {
@@ -79,6 +79,21 @@ cmp.setup {
     )
   }
 }
+
+-- git
+cmp.setup.filetype(
+  "gitcommit",
+  {
+    sources = cmp.config.sources(
+      {
+        {name = "cmp_git"}
+      },
+      {
+        {name = "buffer"}
+      }
+    )
+  }
+)
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(

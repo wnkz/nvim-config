@@ -1,3 +1,9 @@
+" Use English as main language
+language en_US.utf-8
+"}}
+
+scriptencoding utf-8
+
 set mouse=a
 set nu
 set cursorline
@@ -11,6 +17,9 @@ set smartcase
 set updatetime=250
 set signcolumn=yes
 set nowrap
+
+" Minimum lines to keep above and below cursor when scrolling
+set scrolloff=3
 
 " length of an actual \t character:
 set tabstop=2
@@ -35,14 +44,10 @@ set nofoldenable
 " Terminal
 tnoremap <Esc> <C-\><C-n> 
 
-" Dashboard
-let g:dashboard_default_executive = 'telescope'
-nmap <Leader>ss :<C-u>SessionSave<CR>
-nmap <Leader>sl :<C-u>SessionLoad<CR>
+set termguicolors
 
-" nvim-tree
-" cf. ./settings.lua
-let g:nvim_tree_highlight_opened_files = 1 "0 by default, will enable folder and file icon highlight for opened files/directories.
-let g:nvim_tree_root_folder_modifier = ':p:~' "This is the default. See :help filename-modifiers for more options
-let g:nvim_tree_add_trailing = 1 "0 by default, append a trailing slash to folder names
-let g:nvim_tree_respect_buf_cwd = 1 "0 by default, will change cwd of nvim-tree to that of new buffer's when opening nvim-tree.
+" Set up cursor color and shape in various mode, ref:
+" https://github.com/neovim/neovim/wiki/FAQ#how-to-change-cursor-color-in-the-terminal
+" see autocommands.vim
+
+set signcolumn=auto:2
