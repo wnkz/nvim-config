@@ -1,8 +1,9 @@
+scriptencoding utf-8
+
+luafile ~/.config/nvim/core/settings.lua
+
 " Use English as main language
 language en_US.utf-8
-"}}
-
-scriptencoding utf-8
 
 set mouse=a
 set nu
@@ -51,3 +52,8 @@ set termguicolors
 " see autocommands.vim
 
 set signcolumn=auto:2
+
+" filetype.lua
+" https://neovim.discourse.group/t/introducing-filetype-lua-and-a-call-for-help/1806
+" let g:do_filetype_lua = 1
+" let g:did_load_filetypes = 0
