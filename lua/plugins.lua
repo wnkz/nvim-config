@@ -64,6 +64,7 @@ return require("packer").startup(
         require("gitsigns").setup()
       end
     }
+    -- use {"github/copilot.vim"}
 
     -- LSP
     use "williamboman/nvim-lsp-installer"
