@@ -21,7 +21,11 @@ return require("packer").startup(
 
     -- UX
     use "glepnir/dashboard-nvim"
-    use {"nvim-lualine/lualine.nvim", config = [[require('plugconfig.lualine')]]}
+    use {
+      "nvim-lualine/lualine.nvim",
+      requires = {"kyazdani42/nvim-web-devicons", opt = true},
+      config = [[require('plugconfig.lualine')]]
+    }
     use {
       "kyazdani42/nvim-tree.lua",
       requires = {"kyazdani42/nvim-web-devicons"},

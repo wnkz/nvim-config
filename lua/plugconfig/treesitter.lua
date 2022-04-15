@@ -1,7 +1,9 @@
 require "nvim-treesitter.configs".setup {
-  ensure_installed = "maintained",
+  ensure_installed = "all",
   sync_install = false,
-  -- ignore_install = { "r" },
+
+  ignore_install = { "phpdoc" },
+
   highlight = {
     enable = true, -- false will disable the whole extension
     disable = {"vim"},
