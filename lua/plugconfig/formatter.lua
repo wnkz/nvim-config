@@ -38,6 +38,7 @@ require "formatter".setup {
     yaml = {default_prettier},
     json = {default_prettier},
     javascript = {default_prettier},
+    typescript = {default_prettier},
     html = {default_prettier},
     c = {
       function()

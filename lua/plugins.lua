@@ -39,6 +39,7 @@ return require("packer").startup(
     use {"lukas-reineke/indent-blankline.nvim", config = [[require('plugconfig.indent-blankline')]]}
     use {
       "anuvyklack/pretty-fold.nvim",
+      requires = "anuvyklack/nvim-keymap-amend",
       config = function()
         require("pretty-fold").setup {}
         require("pretty-fold.preview").setup {}
