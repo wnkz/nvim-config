@@ -1,4 +1,8 @@
-local lsp_installer = require "nvim-lsp-installer"
+require("nvim-lsp-installer").setup(
+  {
+    automatic_installation = true
+  }
+)
 
 local opts = {noremap = true, silent = true}
 vim.api.nvim_set_keymap("n", "<space>e", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
@@ -120,25 +124,33 @@ local enhance_server_opts = {
   end
 }
 
-lsp_installer.on_server_ready(
-  function(server)
-    -- Specify the default options which we'll use to setup all servers
-    local opts = {
-      on_attach = on_attach,
-      capabilities = capabilities,
-      flags = {
-        debounce_text_changes = 150
-      }
-    }
+local servers = {
+  "bashls",
+  "clangd",
+  "dockerls",
+  "html",
+  "pyright",
+  "sumneko_lua",
+  "terraformls",
+  "tsserver",
+  "vimls",
+  "yamlls"
+}
 
-    if enhance_server_opts[server.name] then
-      -- Enhance the default opts with the server-specific ones
-      enhance_server_opts[server.name](opts)
-    end
+local lspconfig = require("lspconfig")
+for _, lsp in pairs(servers) do
+  local opts = {
+    on_attach = on_attach,
+    capabilities = capabilities
+  }
 
-    server:setup(opts)
+  if enhance_server_opts[lsp] then
+    -- Enhance the default opts with the server-specific ones
+    enhance_server_opts[lsp](opts)
   end
-)
+
+  lspconfig[lsp].setup(opts)
+end
 
 vim.diagnostic.config(
   {

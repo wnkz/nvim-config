@@ -11,7 +11,6 @@ local cmp = require("cmp")
 
 cmp.setup {
   snippet = {
-    -- REQUIRED - you must specify a snippet engine
     expand = function(args)
       luasnip.lsp_expand(args.body)
     end
@@ -99,9 +98,12 @@ cmp.setup.filetype(
 cmp.setup.cmdline(
   "/",
   {
-    sources = {
-      {name = "buffer"}
-    }
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources(
+      {
+        {name = "buffer"}
+      }
+    )
   }
 )
 
@@ -109,6 +111,7 @@ cmp.setup.cmdline(
 cmp.setup.cmdline(
   ":",
   {
+    mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources(
       {
         {name = "path"}
