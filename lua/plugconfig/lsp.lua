@@ -128,6 +128,7 @@ local servers = {
   "bashls",
   "clangd",
   "dockerls",
+  "eslint",
   "html",
   "pyright",
   "sumneko_lua",
