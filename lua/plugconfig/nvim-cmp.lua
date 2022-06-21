@@ -118,7 +118,13 @@ cmp.setup.cmdline(
 require("luasnip.loaders.from_vscode").load()
 
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({map_char = {tex = ""}}))
-
--- add a lisp filetype (wrap my-function), FYI: Hardcoded = { "clojure", "clojurescript", "fennel", "janet" }
-cmp_autopairs.lisp[#cmp_autopairs.lisp + 1] = "racket"
+cmp.event:on(
+  "confirm_done",
+  cmp_autopairs.on_confirm_done(
+    {
+      filetypes = {
+        tex = false
+      }
+    }
+  )
+)
