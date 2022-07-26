@@ -28,10 +28,6 @@ nnoremap <leader>fr <cmd>Telescope git_branches<cr>
 " Formatter
 nnoremap <silent> <leader>f :Format<CR>
 
-" " NERDTree
-" nnoremap <M-n> :NERDTreeToggle<CR>
-" nnoremap <leader>n :NERDTreeFocus<CR>
-
 " NvimTree
 " nnoremap <C-n> :NvimTreeToggle<CR>
 " nnoremap <leader>n :NvimTreeFindFile<CR>

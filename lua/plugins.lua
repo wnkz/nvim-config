@@ -20,7 +20,7 @@ return require("packer").startup(
     }
 
     -- UX
-    use "glepnir/dashboard-nvim"
+    use {"glepnir/dashboard-nvim", config = [[require('plugconfig.dashboard')]]}
     use {
       "nvim-lualine/lualine.nvim",
       requires = {"kyazdani42/nvim-web-devicons", opt = true},
@@ -42,7 +42,13 @@ return require("packer").startup(
       requires = "anuvyklack/nvim-keymap-amend",
       config = function()
         require("pretty-fold").setup {}
-        require("pretty-fold.preview").setup {}
+      end
+    }
+    use {
+      "anuvyklack/fold-preview.nvim",
+      requires = "anuvyklack/keymap-amend.nvim",
+      config = function()
+        require("fold-preview").setup()
       end
     }
     use {
@@ -120,7 +126,8 @@ return require("packer").startup(
       requires = {
         {"nvim-lua/plenary.nvim"},
         {"nvim-telescope/telescope-fzf-native.nvim", run = "make"},
-        {"nvim-telescope/telescope-github.nvim"}
+        {"nvim-telescope/telescope-github.nvim"},
+        {"nvim-telescope/telescope-file-browser.nvim"}
       },
       config = [[require('plugconfig.telescope')]]
     }
