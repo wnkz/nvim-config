@@ -15,5 +15,5 @@ augroup END
 " Auto-generate packer_compiled.lua file
 augroup packer_user_config 
   autocmd!
-  autocmd BufWritePost */nvim/lua/plugins.lua source <afile> | PackerCompile
+  autocmd BufWritePost plugins.lua source <afile> | PackerCompile
 augroup END

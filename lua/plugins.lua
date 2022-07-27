@@ -1,12 +1,18 @@
 return require("packer").startup(
   function(use)
-    use {"lewis6991/impatient.nvim", config = [[require('impatient')]]}
+    use {
+      "lewis6991/impatient.nvim",
+      config = [[require('impatient')]]
+    }
 
     -- Packer can manage itself
     use "wbthomason/packer.nvim"
 
     -- Theme
-    use {"olimorris/onedarkpro.nvim", config = [[require('plugconfig.theme')]]}
+    use {
+      "olimorris/onedarkpro.nvim",
+      config = [[require('plugconfig.theme')]]
+    }
 
     -- Misc.
     use "tpope/vim-commentary"
@@ -20,10 +26,24 @@ return require("packer").startup(
     }
 
     -- UX
-    use {"glepnir/dashboard-nvim", config = [[require('plugconfig.dashboard')]]}
+    use {"goolord/alpha-nvim", config = [[require('plugconfig.dashboard-cfg')]]}
+    use {
+      "Shatur/neovim-session-manager",
+      config = function()
+        require("session_manager").setup(
+          {
+            autoload_mode = require("session_manager.config").AutoloadMode.Disabled
+          }
+        )
+      end
+    }
+    use {"stevearc/dressing.nvim"}
     use {
       "nvim-lualine/lualine.nvim",
-      requires = {"kyazdani42/nvim-web-devicons", opt = true},
+      requires = {
+        "kyazdani42/nvim-web-devicons",
+        opt = true
+      },
       config = [[require('plugconfig.lualine')]]
     }
     use {
@@ -35,8 +55,14 @@ return require("packer").startup(
       "romgrk/barbar.nvim",
       requires = {"kyazdani42/nvim-web-devicons"}
     }
-    use {"mhartington/formatter.nvim", config = [[require('plugconfig.formatter')]]}
-    use {"lukas-reineke/indent-blankline.nvim", config = [[require('plugconfig.indent-blankline')]]}
+    use {
+      "mhartington/formatter.nvim",
+      config = [[require('plugconfig.formatter')]]
+    }
+    use {
+      "lukas-reineke/indent-blankline.nvim",
+      config = [[require('plugconfig.indent-blankline')]]
+    }
     use {
       "anuvyklack/pretty-fold.nvim",
       requires = "anuvyklack/nvim-keymap-amend",
@@ -75,6 +101,10 @@ return require("packer").startup(
         require("gitsigns").setup()
       end
     }
+    use {
+      "sindrets/diffview.nvim",
+      requires = "nvim-lua/plenary.nvim"
+    }
     -- use {"github/copilot.vim"}
 
     -- LSP
@@ -99,7 +129,10 @@ return require("packer").startup(
         "hrsh7th/cmp-nvim-lua",
         "hrsh7th/cmp-path",
         "onsails/lspkind-nvim",
-        {"petertriho/cmp-git", requires = "nvim-lua/plenary.nvim"},
+        {
+          "petertriho/cmp-git",
+          requires = "nvim-lua/plenary.nvim"
+        },
         "ray-x/cmp-treesitter",
         "saadparwaiz1/cmp_luasnip",
         {
@@ -117,7 +150,10 @@ return require("packer").startup(
 
     -- snippets
     use "L3MON4D3/LuaSnip"
-    use {"rafamadriz/friendly-snippets", after = "LuaSnip"}
+    use {
+      "rafamadriz/friendly-snippets",
+      after = "LuaSnip"
+    }
 
     -- Telescope
     use {
@@ -125,9 +161,14 @@ return require("packer").startup(
       cmd = "Telescope",
       requires = {
         {"nvim-lua/plenary.nvim"},
-        {"nvim-telescope/telescope-fzf-native.nvim", run = "make"},
+        {
+          "nvim-telescope/telescope-fzf-native.nvim",
+          run = "make"
+        },
         {"nvim-telescope/telescope-github.nvim"},
-        {"nvim-telescope/telescope-file-browser.nvim"}
+        {"nvim-telescope/telescope-file-browser.nvim"},
+        {"nvim-telescope/telescope-ui-select.nvim"},
+        {"nvim-telescope/telescope-frecency.nvim", requires = {"tami5/sqlite.lua"}}
       },
       config = [[require('plugconfig.telescope')]]
     }

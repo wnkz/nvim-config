@@ -70,3 +70,7 @@ nnoremap <silent> <Space>bb :BufferOrderByBufferNumber<CR>
 nnoremap <silent> <Space>bd :BufferOrderByDirectory<CR>
 nnoremap <silent> <Space>bl :BufferOrderByLanguage<CR>
 nnoremap <silent> <Space>bw :BufferOrderByWindowNumber<CR>
+
+" Sessions
+nmap <leader>ss :SessionManager save_current_session<CR>
+nmap <leader>sl :SessionManager load_current_dir_session<CR>
