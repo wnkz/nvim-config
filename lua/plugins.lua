@@ -108,11 +108,12 @@ return require("packer").startup(
     -- use {"github/copilot.vim"}
 
     -- LSP
-    use "williamboman/nvim-lsp-installer"
+    use {"williamboman/mason.nvim"}
+    use {"williamboman/mason-lspconfig.nvim"}
     use "ray-x/lsp_signature.nvim"
     use {
       "neovim/nvim-lspconfig",
-      after = {"nvim-lsp-installer", "lsp_signature.nvim", "cmp-nvim-lsp"},
+      after = {"mason.nvim", "mason-lspconfig.nvim", "lsp_signature.nvim", "cmp-nvim-lsp"},
       config = [[require('plugconfig.lsp')]]
     }
 

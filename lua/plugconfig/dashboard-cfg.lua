@@ -41,7 +41,7 @@ dashboard.section.buttons.val = {
   dashboard.button("g", "   Find word", ":Telescope live_grep<CR>"),
   dashboard.button("b", "   File Browser", ":Telescope file_browser<CR>"),
   dashboard.button("u", "   Update plugins", ":PackerSync<CR>"), -- Packer sync
-  dashboard.button("s", "   LSP Install info", ":LspInstallInfo<CR>"),
+  dashboard.button("s", "   Mason", ":Mason<CR>"),
   dashboard.button("q", "   Quit", ":qa!<CR>")
 }
 dashboard.section.buttons.opts = {
