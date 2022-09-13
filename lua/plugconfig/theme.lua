@@ -1,11 +1,11 @@
 require("onedarkpro").setup(
   {
-    hlgroups = {
+    highlights = {
       TermCursor = {bg = "${white}"}
     },
     options = {
       cursorline = true,
-      window_unfocussed_color = true
+      window_unfocused_color = true
     }
   }
 )
