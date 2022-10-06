@@ -55,8 +55,3 @@ set signcolumn=auto:2
 
 " Global statusline
 set laststatus=3
-
-" filetype.lua
-" https://neovim.discourse.group/t/introducing-filetype-lua-and-a-call-for-help/1806
-let g:do_filetype_lua = 1
-let g:did_load_filetypes = 0
