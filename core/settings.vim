@@ -24,21 +24,15 @@ set nowrap
 " Minimum lines to keep above and below cursor when scrolling
 set scrolloff=3
 
-" length of an actual \t character:
+set smartindent
+set expandtab
 set tabstop=2
-" length to use when editing text (eg. TAB and BS keys)
-" (0 for ‘tabstop’, -1 for ‘shiftwidth’):
-set softtabstop=-1
-" length to use when shifting text (eg. <<, >> and == commands)
-" (0 for ‘tabstop’):
 set shiftwidth=0
+set softtabstop=-1
+set smarttab
 " round indentation to multiples of 'shiftwidth' when shifting text
 " (so that it behaves like Ctrl-D / Ctrl-T):
 set shiftround
-
-" if set, only insert spaces; otherwise insert \t and complete with spaces:
-set expandtab
-set smartindent
 
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()

@@ -8,7 +8,7 @@ vim.opt.listchars:append("nbsp:⋅")
 
 -- barbar
 vim.g.bufferline = {
-  insert_at_end = true
+    insert_at_end = true
 }
 
 -- Dashboard header colors
