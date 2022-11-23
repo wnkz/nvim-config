@@ -1,33 +1,17 @@
-local function default_prettier()
-  return {
-    exe = "prettier",
-    args = {"--stdin-filepath", vim.api.nvim_buf_get_name(0)},
-    stdin = true
-  }
-end
+local util = require "formatter.util"
 
-require "formatter".setup {
-  logging = false,
+require("formatter").setup {
+  logging = true,
+  log_level = vim.log.levels.WARN,
   filetype = {
     python = {
-      function()
-        return {
-          exe = "black",
-          args = {
-            "-",
-            "--stdin-filename",
-            vim.api.nvim_buf_get_name(0)
-          },
-          stdin = true
-        }
-      end,
+      require("formatter.filetypes.python").black,
       function()
         return {
           exe = "isort",
           args = {
+            "-q",
             "-",
-            "--filename",
-            vim.api.nvim_buf_get_name(0),
             "--profile",
             "black"
           },
@@ -35,20 +19,23 @@ require "formatter".setup {
         }
       end
     },
-    yaml = {default_prettier},
-    json = {default_prettier},
-    javascript = {default_prettier},
-    typescript = {default_prettier},
-    html = {default_prettier},
+    yaml = {
+      require("formatter.filetypes.yaml").prettier
+    },
+    json = {
+      require("formatter.filetypes.json").prettier
+    },
+    javascript = {
+      require("formatter.filetypes.javascript").prettier
+    },
+    typescript = {
+      require("formatter.filetypes.typescript").prettier
+    },
+    html = {
+      require("formatter.filetypes.html").prettier
+    },
     c = {
-      function()
-        return {
-          exe = "clang-format",
-          args = {"--assume-filename", vim.api.nvim_buf_get_name(0)},
-          stdin = true,
-          cwd = vim.fn.expand("%:p:h")
-        }
-      end
+      require("formatter.filetypes.c").clangformat,
     },
     lua = {
       function()
@@ -59,21 +46,14 @@ require "formatter".setup {
         }
       end
     },
-    markdown = {default_prettier},
+    markdown = {
+      require("formatter.filetypes.markdown").prettier
+    },
     sh = {
-      function()
-        return {
-          exe = "shfmt",
-          args = {
-            "-i",
-            2,
-            "-filename",
-            vim.api.nvim_buf_get_name(0),
-            "-"
-          },
-          stdin = true
-        }
-      end
+      require("formatter.filetypes.sh").shfmt,
+    },
+    ["*"] = {
+      require("formatter.filetypes.any").remove_trailing_whitespace
     }
   }
 }

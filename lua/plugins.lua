@@ -2,7 +2,7 @@ return require("packer").startup(
   function(use)
     use {
       "lewis6991/impatient.nvim",
-      config = [[require('impatient')]]
+      config = [[require("impatient")]]
     }
 
     -- Packer can manage itself
@@ -11,7 +11,7 @@ return require("packer").startup(
     -- Theme
     use {
       "olimorris/onedarkpro.nvim",
-      config = [[require('plugconfig.theme')]]
+      config = [[require("plugconfig.onedarkpro")]]
     }
 
     -- Misc.
@@ -22,11 +22,11 @@ return require("packer").startup(
     use {
       "nvim-treesitter/nvim-treesitter",
       run = ":TSUpdate",
-      config = [[require('plugconfig.treesitter')]]
+      config = [[require("plugconfig.treesitter")]]
     }
 
     -- UX
-    use {"goolord/alpha-nvim", config = [[require('plugconfig.dashboard-cfg')]]}
+    use {"goolord/alpha-nvim", config = [[require("plugconfig.dashboard-cfg")]]}
     use {
       "Shatur/neovim-session-manager",
       config = function()
@@ -43,12 +43,12 @@ return require("packer").startup(
       requires = {
         "kyazdani42/nvim-web-devicons"
       },
-      config = [[require('plugconfig.lualine')]]
+      config = [[require("plugconfig.lualine")]]
     }
     use {
       "kyazdani42/nvim-tree.lua",
       requires = {"kyazdani42/nvim-web-devicons"},
-      config = [[require('plugconfig.nvim-tree')]]
+      config = [[require("plugconfig.nvim-tree")]]
     }
     use {
       "romgrk/barbar.nvim",
@@ -56,11 +56,15 @@ return require("packer").startup(
     }
     use {
       "mhartington/formatter.nvim",
-      config = [[require('plugconfig.formatter')]]
+      config = [[require("plugconfig.formatter")]]
+    }
+    use {
+      "mfussenegger/nvim-lint",
+      config = [[require("plugconfig.lint")]]
     }
     use {
       "lukas-reineke/indent-blankline.nvim",
-      config = [[require('plugconfig.indent-blankline')]]
+      config = [[require("plugconfig.indent-blankline")]]
     }
     use {
       "anuvyklack/pretty-fold.nvim",
@@ -113,7 +117,7 @@ return require("packer").startup(
     use {
       "neovim/nvim-lspconfig",
       after = {"mason.nvim", "mason-lspconfig.nvim", "lsp_signature.nvim", "cmp-nvim-lsp"},
-      config = [[require('plugconfig.lsp')]]
+      config = [[require("plugconfig.lsp")]]
     }
 
     -- auto-completion engine
@@ -145,7 +149,7 @@ return require("packer").startup(
         },
         "windwp/nvim-ts-autotag"
       },
-      config = [[require('plugconfig.nvim-cmp')]]
+      config = [[require("plugconfig.nvim-cmp")]]
     }
 
     -- snippets
@@ -170,7 +174,7 @@ return require("packer").startup(
         {"nvim-telescope/telescope-ui-select.nvim"},
         {"nvim-telescope/telescope-frecency.nvim", requires = {"tami5/sqlite.lua"}}
       },
-      config = [[require('plugconfig.telescope')]]
+      config = [[require("plugconfig.telescope")]]
     }
   end
 )

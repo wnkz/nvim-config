@@ -1,3 +1,5 @@
+luafile ~/.config/nvim/core/autocommands.lua
+
 augroup cursor_settings
   autocmd!
   autocmd VimEnter,VimResume * set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
