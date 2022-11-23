@@ -41,11 +41,10 @@ set nofoldenable
 " Terminal
 tnoremap <Esc> <C-\><C-n> 
 
-set termguicolors
-
 " Set up cursor color and shape in various mode, ref:
 " https://github.com/neovim/neovim/wiki/FAQ#how-to-change-cursor-color-in-the-terminal
 " see autocommands.vim
+set termguicolors
 
 set signcolumn=auto:2
 
