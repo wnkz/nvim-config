@@ -6,7 +6,7 @@ require("onedarkpro").setup(
         },
         options = {
             cursorline = true,
-            window_unfocused_color = true
+            highlight_inactive_windows = true
         }
     }
 )

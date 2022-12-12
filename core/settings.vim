@@ -5,7 +5,7 @@ luafile ~/.config/nvim/core/settings.lua
 " Use English as main language
 language en_US.utf-8
 
-colorscheme onedarkpro
+colorscheme onedark
 
 set mouse=a
 set nu
