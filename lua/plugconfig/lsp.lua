@@ -1,9 +1,5 @@
 require("mason").setup()
-require("mason-lspconfig").setup(
-    {
-        automatic_installation = true
-    }
-)
+require("mason-lspconfig").setup()
 
 local opts = {noremap = true, silent = true}
 vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, opts)
@@ -142,6 +138,8 @@ local servers = {
     "eslint",
     "html",
     "pyright",
+    -- "ruff_lsp",
+    "rust_analyzer",
     "sumneko_lua",
     "terraformls",
     "vimls",

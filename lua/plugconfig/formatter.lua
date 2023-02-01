@@ -37,6 +37,9 @@ require("formatter").setup {
         c = {
             require("formatter.filetypes.c").clangformat
         },
+        rust = {
+            require("formatter.filetypes.rust").rustfmt
+        },
         lua = {
             require("formatter.filetypes.lua").luafmt
         },
@@ -45,6 +48,14 @@ require("formatter").setup {
         },
         sh = {
             require("formatter.filetypes.sh").shfmt
+        },
+        sql = {
+            function()
+                return {
+                    exe = "sql-formatter",
+                    stdin = true
+                }
+            end
         },
         ["*"] = {
             require("formatter.filetypes.any").remove_trailing_whitespace
