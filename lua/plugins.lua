@@ -24,6 +24,7 @@ return require("packer").startup(
             run = ":TSUpdate",
             config = [[require("plugconfig.treesitter")]]
         }
+        use "tpope/vim-surround"
 
         -- UX
         use {"goolord/alpha-nvim", config = [[require("plugconfig.dashboard-cfg")]]}

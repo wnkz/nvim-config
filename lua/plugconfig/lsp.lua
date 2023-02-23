@@ -106,7 +106,7 @@ local enhance_server_opts = {
             }
         }
     end,
-    ["sumneko_lua"] = function(opts)
+    ["lua_ls"] = function(opts)
         opts.settings = {
             Lua = {
                 runtime = {
@@ -140,7 +140,7 @@ local servers = {
     "pyright",
     -- "ruff_lsp",
     "rust_analyzer",
-    "sumneko_lua",
+    "lua_ls",
     "terraformls",
     "vimls",
     "yamlls"
