@@ -34,8 +34,6 @@ set smarttab
 " (so that it behaves like Ctrl-D / Ctrl-T):
 set shiftround
 
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
 set nofoldenable
 
 " Terminal

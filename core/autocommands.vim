@@ -13,9 +13,3 @@ augroup term_settings
   " Go to insert mode by default to start typing command
   autocmd TermOpen * startinsert
 augroup END
-
-" Auto-generate packer_compiled.lua file
-augroup packer_user_config 
-  autocmd!
-  autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-augroup END

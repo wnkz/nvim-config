@@ -1,15 +1,17 @@
-require "nvim-treesitter.configs".setup {
+require("nvim-treesitter.configs").setup({
     ensure_installed = "all",
     sync_install = false,
-    ignore_install = {"phpdoc"},
+    -- Automatically install missing parsers when entering buffer
+    -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+    auto_install = true,
     highlight = {
         enable = true, -- false will disable the whole extension
-        disable = {"vim"},
+        disable = { "vim" },
         -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
         -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
         -- Using this option may slow down your editor, and you may see some duplicate highlights.
         -- Instead of true it can also be a list of languages
-        additional_vim_regex_highlighting = false
+        additional_vim_regex_highlighting = false,
     },
     incremental_selection = {
         enable = true,
@@ -17,14 +19,14 @@ require "nvim-treesitter.configs".setup {
             init_selection = "gnn",
             node_incremental = "grn",
             scope_incremental = "grc",
-            node_decremental = "grm"
-        }
+            node_decremental = "grm",
+        },
     },
     indent = {
-        enable = true
+        enable = true,
         -- disable = {"python", "yaml"}
     },
     autotag = {
-        enable = true
-    }
-}
+        enable = true,
+    },
+})

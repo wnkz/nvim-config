@@ -9,13 +9,6 @@ vnoremap <leader>p "+p
 
 nnoremap cp yap<S-}>p
 
-" fzf
-" " nnoremap <C-p> :Files<cr>
-" nnoremap <leader>ff :Files<cr>
-" nnoremap <leader>fg :Rg<cr>
-" nnoremap <leader>fb :Buffers<cr>
-" nnoremap <leader>fp :Commands<cr>
-
 " telescope
 " Find files using Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
@@ -25,15 +18,10 @@ nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>fr <cmd>Telescope git_branches<cr>
 
-" Formatter
-nnoremap <silent> <leader>f :Format<CR>
-
 " NvimTree
-" nnoremap <C-n> :NvimTreeToggle<CR>
-" nnoremap <leader>n :NvimTreeFindFile<CR>
+nnoremap <C-n> :NvimTreeToggle<CR>
+nnoremap <leader>n :NvimTreeFindFile<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
-nnoremap <C-n> :lua require'nvim-tree-barbar'.toggle()<CR>
-nnoremap <leader>n :lua require'nvim-tree-barbar'.open()<CR>
 
 " barbar
 " Move to previous/next

@@ -9,7 +9,7 @@ local header = {
     [[    █████████  ███    █████████████ █████ ██████████████  ]],
     [[   █████████ ██████████ █████████ █████ █████ ████ █████  ]],
     [[ ███████████ ███    ███ █████████ █████ █████ ████ █████ ]],
-    [[██████  █████████████████████ ████ █████ █████ ████ ██████]]
+    [[██████  █████████████████████ ████ █████ █████ ████ ██████]],
 }
 
 -- Make the header a bit more fun with some color!
@@ -23,8 +23,8 @@ local function colorize_header()
             opts = {
                 hl = "StartLogo" .. i,
                 shrink_margin = false,
-                position = "center"
-            }
+                position = "center",
+            },
         }
 
         table.insert(lines, line)
@@ -42,10 +42,10 @@ dashboard.section.buttons.val = {
     dashboard.button("b", "   File Browser", ":Telescope file_browser<CR>"),
     dashboard.button("u", "   Update plugins", ":PackerSync<CR>"), -- Packer sync
     dashboard.button("s", "   Mason", ":Mason<CR>"),
-    dashboard.button("q", "   Quit", ":qa!<CR>")
+    dashboard.button("q", "   Quit", ":qa!<CR>"),
 }
 dashboard.section.buttons.opts = {
-    spacing = 0
+    spacing = 0,
 }
 
 -- Footer
@@ -59,46 +59,40 @@ end
 dashboard.section.footer.val = footer()
 
 dashboard.config.layout = {
-    {type = "padding", val = 2},
-    {type = "group", val = colorize_header()},
-    {type = "padding", val = 2},
+    { type = "padding", val = 2 },
+    { type = "group", val = colorize_header() },
+    { type = "padding", val = 2 },
     dashboard.section.buttons,
-    {type = "padding", val = 1},
-    dashboard.section.footer
+    { type = "padding", val = 1 },
+    dashboard.section.footer,
 }
 
 -- Hide all the unnecessary visual elements while on the dashboard, and add
 -- them back when leaving the dashboard.
 local group = vim.api.nvim_create_augroup("CleanDashboard", {})
 
-vim.api.nvim_create_autocmd(
-    "User",
-    {
-        group = group,
-        pattern = "AlphaReady",
-        callback = function()
-            vim.opt.showtabline = 0
-            vim.opt.showmode = false
-            vim.opt.laststatus = 0
-            vim.opt.showcmd = false
-            vim.opt.ruler = false
-        end
-    }
-)
+vim.api.nvim_create_autocmd("User", {
+    group = group,
+    pattern = "AlphaReady",
+    callback = function()
+        vim.opt.showtabline = 0
+        vim.opt.showmode = false
+        vim.opt.laststatus = 0
+        vim.opt.showcmd = false
+        vim.opt.ruler = false
+    end,
+})
 
-vim.api.nvim_create_autocmd(
-    "BufUnload",
-    {
-        group = group,
-        pattern = "<buffer>",
-        callback = function()
-            vim.opt.showtabline = 2
-            vim.opt.showmode = true
-            vim.opt.laststatus = 3
-            vim.opt.showcmd = true
-            vim.opt.ruler = true
-        end
-    }
-)
+vim.api.nvim_create_autocmd("BufUnload", {
+    group = group,
+    pattern = "<buffer>",
+    callback = function()
+        vim.opt.showtabline = 2
+        vim.opt.showmode = true
+        vim.opt.laststatus = 3
+        vim.opt.showcmd = true
+        vim.opt.ruler = true
+    end,
+})
 
 alpha.setup(dashboard.config)

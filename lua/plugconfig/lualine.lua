@@ -10,7 +10,7 @@ local colors = {
     violet = "#a9a1e1",
     magenta = "#c678dd",
     blue = "#51afef",
-    red = "#ec5f67"
+    red = "#ec5f67",
 }
 
 local function active_lsp()
@@ -23,57 +23,59 @@ local function active_lsp()
     for _, client in ipairs(clients) do
         local filetypes = client.config.filetypes
         if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-            return client.name
+            if client.name ~= "null-ls" then
+                return client.name
+            end
         end
     end
     return msg
 end
 
-require("lualine").setup {
+require("lualine").setup({
     options = {
-        theme = "onedark"
+        theme = "onedark",
     },
     sections = {
-        lualine_a = {"mode"},
-        lualine_b = {"branch"},
+        lualine_a = { "mode" },
+        lualine_b = { "branch" },
         lualine_c = {
             {
                 "filename",
-                path = 1
+                path = 1,
             },
             {
                 "diff",
-                colored = true
-            }
+                colored = true,
+            },
         },
         lualine_x = {
             "encoding",
             "fileformat",
             {
                 "filetype",
-                colored = true
+                colored = true,
             },
             {
                 active_lsp,
-                icon = " LSP:"
+                icon = " ",
             },
             {
                 "diagnostics",
-                sources = {"nvim_diagnostic"},
-                sections = {"error", "warn", "info"},
+                sources = { "nvim_diagnostic" },
+                sections = { "error", "warn", "info" },
                 -- symbols = {error = ' ', warn = ' ', info = ' '},
-                symbols = {error = " ", warn = " ", info = " ", hint = " "},
+                symbols = { error = " ", warn = " ", info = " ", hint = " " },
                 color_error = colors.red,
                 color_warn = colors.yellow,
-                color_info = colors.cyan
-            }
+                color_info = colors.cyan,
+            },
         },
-        lualine_y = {"progress"},
-        lualine_z = {"location"}
+        lualine_y = { "progress" },
+        lualine_z = { "location" },
     },
     extensions = {
         "fugitive",
         "fzf",
-        "nvim-tree"
-    }
-}
+        "nvim-tree",
+    },
+})
