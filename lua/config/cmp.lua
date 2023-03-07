@@ -5,9 +5,9 @@ local has_words_before = function()
     return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
+local cmp = require("cmp")
 local luasnip = require("luasnip")
 local lspkind = require("lspkind")
-local cmp = require("cmp")
 
 cmp.setup({
     snippet = {
@@ -90,8 +90,6 @@ cmp.setup.cmdline(":", {
         { name = "cmdline" },
     }),
 })
-
-require("luasnip.loaders.from_vscode").load()
 
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 cmp.event:on(
