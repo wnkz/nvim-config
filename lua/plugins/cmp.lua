@@ -32,5 +32,4 @@ return {
         },
     },
     { "rafamadriz/friendly-snippets", lazy = true },
-    { "folke/neodev.nvim", lazy = true },
 }

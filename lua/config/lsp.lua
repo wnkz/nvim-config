@@ -41,6 +41,8 @@ local on_attach = function(client, bufnr)
     }, bufnr)
 end
 
+require("neodev").setup()
+
 local lspconfig = require("lspconfig")
 
 -- Add additional capabilities supported by nvim-cmp
