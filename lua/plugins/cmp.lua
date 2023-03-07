@@ -18,6 +18,7 @@ return {
             { "ray-x/cmp-treesitter", lazy = true },
             { "onsails/lspkind-nvim", lazy = true }, -- adds vscode-like pictograms
             { "saadparwaiz1/cmp_luasnip", lazy = true },
+            { "rcarriga/cmp-dap", lazy = true },
         },
     },
     {

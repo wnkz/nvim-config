@@ -101,6 +101,12 @@ cmp.setup.cmdline(":", {
     }),
 })
 
+cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+    sources = {
+        { name = "dap" },
+    },
+})
+
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 cmp.event:on(
     "confirm_done",
