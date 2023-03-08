@@ -22,10 +22,49 @@ return {
             incremental_selection = {
                 enable = true,
                 keymaps = {
-                    init_selection = "gnn",
-                    node_incremental = "grn",
-                    scope_incremental = "grc",
-                    node_decremental = "grm",
+                    init_selection = "<CR>",
+                    scope_incremental = "<CR>",
+                    node_incremental = "<TAB>",
+                    node_decremental = "<S-TAB>",
+                },
+            },
+            textobjects = {
+                select = {
+                    enable = true,
+                    lookahead = true,
+                    keymaps = {
+                        ["af"] = "@function.outer",
+                        ["if"] = "@function.inner",
+                    },
+                },
+                -- inspired by https://docs.helix-editor.com/keymap.html#unimpaired
+                move = {
+                    enable = true,
+                    set_jumps = true,
+                    goto_next_start = {
+                        ["]f"] = "@function.outer",
+                        ["]a"] = "@parameter.inner",
+                        ["]c"] = "@comment.outer",
+                        ["]s"] = "@statement.outer",
+                    },
+                    goto_next_end = {
+                        ["]F"] = "@function.outer",
+                        ["]A"] = "@parameter.inner",
+                        ["]C"] = "@comment.outer",
+                        ["]S"] = "@statement.outer",
+                    },
+                    goto_previous_start = {
+                        ["[f"] = "@function.outer",
+                        ["[a"] = "@parameter.inner",
+                        ["[c"] = "@comment.outer",
+                        ["[s"] = "@statement.outer",
+                    },
+                    goto_previous_end = {
+                        ["[F"] = "@function.outer",
+                        ["[A"] = "@parameter.inner",
+                        ["[C"] = "@comment.outer",
+                        ["[S"] = "@statement.outer",
+                    },
                 },
             },
             indent = {
@@ -34,12 +73,19 @@ return {
             autotag = {
                 enable = true,
             },
+            playground = {
+                enable = true,
+            },
         },
         config = function(_, opts)
             require("nvim-treesitter.configs").setup(opts)
         end,
         dependencies = {
+            "nvim-treesitter-textobjects",
+            "playground",
             "windwp/nvim-ts-autotag",
         },
     },
+    { "nvim-treesitter/nvim-treesitter-textobjects" },
+    { "nvim-treesitter/playground" },
 }
