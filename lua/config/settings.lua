@@ -10,6 +10,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.scrolloff = 3 -- minimum lines to keep above and below cursor when scrolling
 vim.opt.laststatus = 3 -- global status line
+vim.opt.signcolumn = "auto:2"
 
 -- Set up cursor color and shape in various mode, ref:
 -- https://github.com/neovim/neovim/wiki/FAQ#how-to-change-cursor-color-in-the-terminal

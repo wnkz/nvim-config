@@ -8,7 +8,6 @@ return {
         "numToStr/Comment.nvim",
         config = true,
         keys = { { "gc", mode = { "n", "v" } }, { "gb", mode = { "n", "v" } } },
-        event = "User FileOpened",
     },
     {
         "windwp/nvim-autopairs",
@@ -88,7 +87,7 @@ return {
     -- Git / GitHub
     "tpope/vim-fugitive",
     "tpope/vim-rhubarb",
-    { "lewis6991/gitsigns.nvim", config = true, event = "User FileOpened" },
+    { "lewis6991/gitsigns.nvim", config = true },
     "sindrets/diffview.nvim",
     -- "github/copilot.vim"
 }
