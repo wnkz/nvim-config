@@ -1,5 +1,6 @@
 vim.g.mapleader = "\\"
 
+vim.keymap.set("n", "U", "<C-r>")
 vim.keymap.set("n", "<leader>s", ":update<CR>")
 vim.keymap.set("n", "cp", "yap<S-}>p")
 
