@@ -18,9 +18,9 @@ vim.keymap.set("n", "<leader>fh", ":Telescope help_tags<CR>")
 vim.keymap.set("n", "<leader>fr", ":Telescope git_branches<CR>")
 
 -- NvimTree
-vim.keymap.set("n", "<C-n>", ":NvimTreeToggle<CR>")
-vim.keymap.set("n", "<leader>n", ":NvimTreeFindFile<CR>")
-vim.keymap.set("n", "<leader>r", ":NvimTreeRefresh<CR>")
+vim.keymap.set("n", "<C-n>", ":NvimTreeToggle<CR>", { silent = true })
+vim.keymap.set("n", "<leader>n", ":NvimTreeFindFile<CR>", { silent = true })
+vim.keymap.set("n", "<leader>r", ":NvimTreeRefresh<CR>", { silent = true })
 
 -- Sessions
 vim.keymap.set("n", "<leader>ss", ":SessionManager save_current_session<CR>")
