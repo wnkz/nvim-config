@@ -26,39 +26,17 @@ vim.keymap.set("n", "<leader>r", ":NvimTreeRefresh<CR>", { silent = true })
 vim.keymap.set("n", "<leader>ss", ":SessionManager save_current_session<CR>")
 vim.keymap.set("n", "<leader>sl", ":SessionManager load_current_dir_session<CR>")
 
--- barbar
-local barbar_opts = { noremap = true, silent = true }
--- Move to previous/next
-vim.keymap.set("n", "<A-,>", "<Cmd>BufferPrevious<CR>", barbar_opts)
-vim.keymap.set("n", "<A-.>", "<Cmd>BufferNext<CR>", barbar_opts)
--- Re-order to previous/next
-vim.keymap.set("n", "<A-<>", "<Cmd>BufferMovePrevious<CR>", barbar_opts)
-vim.keymap.set("n", "<A->>", "<Cmd>BufferMoveNext<CR>", barbar_opts)
--- Goto buffer in position...
-for i = 1, 9 do
-    vim.keymap.set("n", "<A-" .. i .. ">", "<Cmd>BufferGoto " .. i .. "<CR>", barbar_opts)
-end
-vim.keymap.set("n", "<A-0>", "<Cmd>BufferLast<CR>", barbar_opts)
--- Pin/unpin buffer
-vim.keymap.set("n", "<A-p>", "<Cmd>BufferPin<CR>", barbar_opts)
--- Close buffer
-vim.keymap.set("n", "<A-c>", "<Cmd>BufferClose<CR>", barbar_opts)
--- Wipeout buffer
---                 :BufferWipeout
--- Close commands
---                 :BufferCloseAllButCurrent
---                 :BufferCloseAllButPinned
---                 :BufferCloseAllButCurrentOrPinned
---                 :BufferCloseBuffersLeft
---                 :BufferCloseBuffersRight
--- Magic buffer-picking mode
-vim.keymap.set("n", "<C-p>", "<Cmd>BufferPick<CR>", barbar_opts)
--- Sort automatically by...
-vim.keymap.set("n", "<Space>bb", "<Cmd>BufferOrderByBufferNumber<CR>", barbar_opts)
-vim.keymap.set("n", "<Space>bd", "<Cmd>BufferOrderByDirectory<CR>", barbar_opts)
-vim.keymap.set("n", "<Space>bl", "<Cmd>BufferOrderByLanguage<CR>", barbar_opts)
-vim.keymap.set("n", "<Space>bw", "<Cmd>BufferOrderByWindowNumber<CR>", barbar_opts)
+-- bufferline
+local opts = { noremap = true, silent = true }
+vim.keymap.set("n", "<A-c>", ":BDelete this<CR>", opts)
+vim.keymap.set("n", "<C-p>", ":BufferLinePick<CR>", opts)
+vim.keymap.set("n", "<A-p>", ":BufferLineTogglePin<CR>", opts)
+vim.keymap.set("n", "<A-,>", ":BufferLineCyclePrev<CR>", opts)
+vim.keymap.set("n", "<A-.>", ":BufferLineCycleNext<CR>", opts)
+vim.keymap.set("n", "<A-<>", ":BufferLineMovePrev<CR>", opts)
+vim.keymap.set("n", "<A->>", ":BufferLineMoveNext<CR>", opts)
 
--- Other:
--- :BarbarEnable - enables barbar (enabled by default)
--- :BarbarDisable - very bad command, should never be used
+vim.keymap.set("n", "<A-0>", ":BufferLineGoToBuffer -1", opts)
+for i = 1, 9 do
+    vim.keymap.set("n", "<A-" .. i .. ">", ":BufferLineGoToBuffer" .. i .. "<CR>", opts)
+end
