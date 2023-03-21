@@ -16,9 +16,3 @@ vim.api.nvim_create_autocmd("TermOpen", { -- Go to insert mode by default to sta
     pattern = "*",
     command = "startinsert",
 })
-
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-    callback = function()
-        require("lint").try_lint()
-    end,
-})

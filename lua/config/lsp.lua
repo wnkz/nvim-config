@@ -159,18 +159,16 @@ local null_ls = require("null-ls")
 
 null_ls.setup({
     sources = {
+        null_ls.builtins.diagnostics.cfn_lint,
+        null_ls.builtins.formatting.prettierd,
         null_ls.builtins.formatting.black,
-        null_ls.builtins.formatting.isort.with({
-            extra_args = { "--profile", "black" },
-        }),
-        null_ls.builtins.formatting.rustfmt.with({
-            extra_args = { "--edition=2021" },
-        }),
+        null_ls.builtins.formatting.isort.with({ extra_args = { "--profile", "black" } }),
+        null_ls.builtins.formatting.stylua,
+        null_ls.builtins.formatting.rustfmt.with({ extra_args = { "--edition=2021" } }),
         null_ls.builtins.formatting.clang_format.with({ filetypes = { "c" } }),
         null_ls.builtins.formatting.shfmt,
-        null_ls.builtins.formatting.prettierd,
         null_ls.builtins.formatting.sql_formatter,
-        null_ls.builtins.formatting.stylua,
+        null_ls.builtins.formatting.terraform_fmt,
         null_ls.builtins.formatting.trim_newlines,
         null_ls.builtins.formatting.trim_whitespace,
     },
