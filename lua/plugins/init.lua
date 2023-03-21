@@ -62,6 +62,7 @@ return {
             filetype_exclude = {
                 "alpha",
                 "dashboard",
+                "help",
                 "lazy",
                 "lsp-installer",
                 "mason",
