@@ -1,17 +1,12 @@
 return {
-    "olimorris/onedarkpro.nvim",
+    "navarasu/onedark.nvim",
     lazy = false,
     priority = 1000,
     opts = {
-        caching = true,
+        style = "dark",
         highlights = {
-            AlphaHeader = { fg = "${green}" },
-            AlphaFooter = { fg = "${green}" },
-            TermCursor = { bg = "${white}" },
-        },
-        options = {
-            cursorline = true,
-            highlight_inactive_windows = true,
+            AlphaHeader = { fg = "$green" },
+            AlphaFooter = { fg = "$green" },
         },
     },
 }
