@@ -1,6 +1,11 @@
 vim.cmd("language en_US.utf-8")
 vim.cmd("colorscheme onedark")
 
+-- NvimTree
+-- disable netrw at the very start of your init.lua (strongly advised)
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 vim.opt.mouse = "a"
 vim.opt.number = true
 vim.opt.cursorline = true
