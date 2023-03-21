@@ -4,7 +4,7 @@
 
 ## ✨ Features
 
-- 📦 [lazy.nvim](https://github.com/folke/lazy.nvim)
+- 📦 Manage plugins with [lazy.nvim](https://github.com/folke/lazy.nvim) (`:Lazy`)
 
 ## ⚡️ Requirements
 

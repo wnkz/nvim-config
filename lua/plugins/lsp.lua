@@ -20,16 +20,5 @@ return {
     },
     { "ray-x/lsp_signature.nvim", lazy = true },
     { "jose-elias-alvarez/null-ls.nvim", lazy = true },
-    {
-        "mfussenegger/nvim-lint",
-        config = function()
-            require("lint").linters_by_ft = {
-                markdown = { "vale" },
-                terraform = { "tflint" },
-                yaml = { "cfn_lint" },
-            }
-        end,
-        lazy = true,
-    },
     { "folke/neodev.nvim", lazy = true },
 }
