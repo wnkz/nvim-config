@@ -13,6 +13,7 @@ return {
             { "hrsh7th/cmp-cmdline", lazy = true },
             { "hrsh7th/cmp-calc", lazy = true },
             { "hrsh7th/cmp-emoji", lazy = true },
+            { "hrsh7th/cmp-nvim-lsp-signature-help", lazy = true },
             { "petertriho/cmp-git", lazy = true },
             { "ray-x/cmp-treesitter", lazy = true },
             { "onsails/lspkind-nvim", lazy = true }, -- adds vscode-like pictograms
