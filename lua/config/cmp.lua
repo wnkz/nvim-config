@@ -24,7 +24,10 @@ cmp.setup({
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
         ["<C-Space>"] = cmp.mapping.complete(),
         ["<C-e>"] = cmp.mapping.abort(),
-        ["<CR>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        ["<CR>"] = cmp.mapping.confirm({
+            select = false,
+            behavior = cmp.ConfirmBehavior.Replace,
+        }),
         ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
@@ -57,6 +60,8 @@ cmp.setup({
         { name = "luasnip" },
         { name = "treesitter" },
     }, {
+        { name = "nvim_lsp_signature_help" },
+    }, {
         { name = "buffer" },
         { name = "path" },
         { name = "calc" },
@@ -64,7 +69,7 @@ cmp.setup({
     }),
     formatting = {
         format = lspkind.cmp_format({
-            mode = "symbol_text",
+            mode = "symbol",
         }),
     },
 })
