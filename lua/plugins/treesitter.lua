@@ -86,6 +86,6 @@ return {
             "windwp/nvim-ts-autotag",
         },
     },
-    { "nvim-treesitter/nvim-treesitter-textobjects" },
-    { "nvim-treesitter/playground" },
+    { "nvim-treesitter/nvim-treesitter-textobjects", lazy = true },
+    { "nvim-treesitter/playground", lazy = true },
 }

@@ -2,7 +2,7 @@ return {
     {
         "akinsho/bufferline.nvim",
         version = "v3.*",
-        event = "BufReadPre",
+        event = "VimEnter",
         opts = {
             options = {
                 offsets = {
@@ -23,7 +23,7 @@ return {
     },
     {
         "kazhala/close-buffers.nvim",
-        event = "BufReadPre",
+        event = "VimEnter",
         config = true,
     },
 }
