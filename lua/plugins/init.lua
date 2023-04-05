@@ -90,6 +90,7 @@ return {
     },
     { "ellisonleao/glow.nvim", cmd = { "Glow" }, config = true },
     { "wfxr/minimap.vim", cmd = { "Minimap", "MinimapToggle" } },
+    { "norcalli/nvim-colorizer.lua", config = true, event = "VeryLazy" },
 
     -- Git / GitHub
     { "tpope/vim-fugitive", cmd = { "G", "Git" } },
