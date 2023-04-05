@@ -27,6 +27,7 @@ return {
             require("telescope").load_extension("file_browser")
             require("telescope").load_extension("ui-select")
             require("telescope").load_extension("frecency")
+            require("telescope").load_extension("dap")
         end,
         cmd = "Telescope",
         dependencies = {
@@ -35,6 +36,7 @@ return {
             "nvim-telescope/telescope-file-browser.nvim",
             "nvim-telescope/telescope-ui-select.nvim",
             "telescope-frecency.nvim",
+            "nvim-telescope/telescope-dap.nvim",
         },
     },
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true },

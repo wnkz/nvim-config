@@ -9,10 +9,3 @@ vim.api.nvim_create_autocmd({ "VimLeave", "VimSuspend" }, {
     pattern = "*",
     command = "set guicursor=a:block-blinkwait100-blinkoff500-blinkon500",
 })
-
-local term_settings = vim.api.nvim_create_augroup("term_settings", { clear = true })
-vim.api.nvim_create_autocmd("TermOpen", { -- Go to insert mode by default to start typing command
-    group = term_settings,
-    pattern = "*",
-    command = "startinsert",
-})

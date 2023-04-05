@@ -15,8 +15,8 @@ return {
         opts = { check_ts = true },
         dependencies = { "nvim-treesitter", "nvim-cmp" },
     },
-    { "kylechui/nvim-surround", version = "*", config = true },
-    { "ggandor/lightspeed.nvim", lazy = true },
+    { "kylechui/nvim-surround", version = "*", config = true, event = "VeryLazy" },
+    { "ggandor/lightspeed.nvim", event = "VeryLazy" },
     {
         "folke/which-key.nvim",
         config = true,
@@ -50,7 +50,7 @@ return {
         end,
         event = "VimEnter",
     },
-    { "chentoast/marks.nvim", opts = { signs = true, mappings = {} } },
+    { "chentoast/marks.nvim", opts = { signs = true, mappings = {} }, event = "BufEnter" },
     {
         "lukas-reineke/indent-blankline.nvim",
         opts = {
@@ -69,26 +69,33 @@ return {
                 "packer",
             },
         },
+        event = "VimEnter",
     },
     {
         "Shatur/neovim-session-manager",
         config = function()
             require("session_manager").setup({
-                autoload_mode = require("session_manager.config").AutoloadMode.Disabled,
+                autoload_mode = require("session_manager.config").AutoloadMode.CurrentDir,
             })
         end,
+        event = "VimEnter",
     },
     { "stevearc/dressing.nvim", event = "VeryLazy" },
-    { "mechatroner/rainbow_csv", lazy = true },
-    { "anuvyklack/pretty-fold.nvim", config = true },
-    { "anuvyklack/fold-preview.nvim", dependencies = { "anuvyklack/keymap-amend.nvim" }, config = true },
+    { "mechatroner/rainbow_csv", event = "BufEnter *.csv" },
+    { "anuvyklack/pretty-fold.nvim", config = true, event = "BufEnter" },
+    {
+        "anuvyklack/fold-preview.nvim",
+        dependencies = { "anuvyklack/keymap-amend.nvim" },
+        config = true,
+        event = "BufEnter",
+    },
     { "ellisonleao/glow.nvim", cmd = { "Glow" }, config = true },
     { "wfxr/minimap.vim", cmd = { "Minimap", "MinimapToggle" } },
 
     -- Git / GitHub
-    "tpope/vim-fugitive",
-    "tpope/vim-rhubarb",
+    { "tpope/vim-fugitive", cmd = { "G", "Git" } },
+    { "tpope/vim-rhubarb", cmd = { "GBrowse" } },
     { "lewis6991/gitsigns.nvim", config = true },
-    "sindrets/diffview.nvim",
+    { "sindrets/diffview.nvim", cmd = { "DiffviewOpen", "DiffviewFileHistory" } },
     -- "github/copilot.vim"
 }

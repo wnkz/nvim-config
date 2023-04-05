@@ -1,15 +1,19 @@
 return {
     {
         "neovim/nvim-lspconfig",
-        lazy = true,
+        event = { "BufReadPre", "BufNewFile" },
         dependencies = {
             "mason-lspconfig.nvim",
             "neodev.nvim",
         },
+        config = function()
+            require("config.lsp")
+        end,
     },
     {
         "williamboman/mason.nvim",
-        cmd = { "Mason", "MasonInstall", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
+        build = ":MasonUpdate",
+        cmd = { "Mason", "MasonInstall", "MasonUninstall", "MasonUninstallAll", "MasonLog", "MasonUpdate" },
         config = true,
     },
     {
@@ -22,7 +26,23 @@ return {
         dependencies = { "mason.nvim" },
     },
     {
+        "jay-babu/mason-null-ls.nvim",
+        event = { "BufReadPre", "BufNewFile" },
+        dependencies = {
+            "mason.nvim",
+            "null-ls.nvim",
+        },
+        config = function()
+            require("mason-null-ls").setup({
+                ensure_installed = {},
+                automatic_installation = true,
+                automatic_setup = false,
+            })
+        end,
+    },
+    {
         "jose-elias-alvarez/null-ls.nvim",
+        event = { "BufReadPre", "BufNewFile" },
         config = function()
             local null_ls = require("null-ls")
             local diagnostics = null_ls.builtins.diagnostics
@@ -49,7 +69,10 @@ return {
     },
     {
         "folke/neodev.nvim",
-        config = true,
+        opts = {
+            library = { plugins = { "nvim-dap-ui" }, types = true },
+        },
         lazy = true,
     },
+    { "simrat39/rust-tools.nvim", lazy = true },
 }

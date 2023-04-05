@@ -7,6 +7,8 @@ return {
         highlights = {
             AlphaHeader = { fg = "$green" },
             AlphaFooter = { fg = "$green" },
+            DapBreakpoint = { fg = "$red" },
+            DapStopped = { fg = "$yellow" },
         },
     },
 }

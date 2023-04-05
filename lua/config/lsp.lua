@@ -49,11 +49,33 @@ require("mason-lspconfig").setup_handlers({
         })
     end,
     ["clangd"] = function()
-        -- fix: warning: multiple different client offset_encodings
-        local clangd_capabilities = capabilities
-        clangd_capabilities.offsetEncoding = "utf-8"
         lspconfig.clangd.setup({
-            capabilities = clangd_capabilities,
+            cmd = {
+                "clangd",
+                "--completion-style=detailed",
+                "--offset-encoding=utf-16", -- fix: warning: multiple different client offset_encodings
+            },
+            capabilities = capabilities,
+        })
+    end,
+    ["rust_analyzer"] = function()
+        local rt = require("rust-tools")
+        local masonrs = require("mason-registry")
+        local install_path = masonrs.get_package("codelldb"):get_install_path()
+        local codelldb_path = install_path .. "/extension/adapter/codelldb"
+        local liblldb_path = install_path .. "/extension/lldb/lib/liblldb.dylib"
+        local rt_capabilities = vim.deepcopy(capabilities)
+
+        rt.setup({
+            server = {
+                capabilities = rt_capabilities,
+                on_attach = function(_, bufnr)
+                    vim.keymap.set("n", "K", rt.hover_actions.hover_actions, { buffer = bufnr })
+                end,
+            },
+            dap = {
+                adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
+            },
         })
     end,
     ["yamlls"] = function()
