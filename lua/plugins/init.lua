@@ -16,7 +16,6 @@ return {
         dependencies = { "nvim-treesitter", "nvim-cmp" },
     },
     { "kylechui/nvim-surround", version = "*", config = true, event = "VeryLazy" },
-    { "ggandor/lightspeed.nvim", event = "VeryLazy" },
     {
         "folke/which-key.nvim",
         config = true,
