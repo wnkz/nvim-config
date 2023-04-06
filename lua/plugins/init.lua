@@ -40,6 +40,7 @@ return {
             "ToggleTermSendVisualSelection",
         },
     },
+    { "Wansmer/treesj", dependencies = "nvim-treesitter", config = true },
 
     -- UI / UX
     {
