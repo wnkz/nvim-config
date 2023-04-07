@@ -36,6 +36,12 @@ vim.keymap.set("n", "<A-.>", ":BufferLineCycleNext<CR>", opts)
 vim.keymap.set("n", "<A-<>", ":BufferLineMovePrev<CR>", opts)
 vim.keymap.set("n", "<A->>", ":BufferLineMoveNext<CR>", opts)
 
+-- kitty + nvim sees <M-S-,> and <M-S-.> instead of <A-<> and <A->>
+-- https://sw.kovidgoyal.net/kitty/keyboard-protocol/
+-- https://github.com/neovim/neovim/pull/18181
+vim.keymap.set("n", "<A-S-,>", ":BufferLineMovePrev<CR>", opts)
+vim.keymap.set("n", "<A-S-.>", ":BufferLineMoveNext<CR>", opts)
+
 vim.keymap.set("n", "<A-0>", ":BufferLineGoToBuffer -1", opts)
 for i = 1, 9 do
     vim.keymap.set("n", "<A-" .. i .. ">", ":BufferLineGoToBuffer" .. i .. "<CR>", opts)
