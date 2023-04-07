@@ -62,6 +62,7 @@ return {
                     formatting.terraform_fmt,
                     formatting.trim_newlines,
                     formatting.trim_whitespace,
+                    require("typescript.extensions.null-ls.code-actions"),
                 },
             })
         end,
@@ -75,4 +76,5 @@ return {
         lazy = true,
     },
     { "simrat39/rust-tools.nvim", lazy = true },
+    { "jose-elias-alvarez/typescript.nvim", lazy = true },
 }

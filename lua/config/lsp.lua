@@ -78,6 +78,13 @@ require("mason-lspconfig").setup_handlers({
             },
         })
     end,
+    ["tsserver"] = function()
+        require("typescript").setup({
+            server = {
+                capabilities = capabilities,
+            },
+        })
+    end,
     ["yamlls"] = function()
         lspconfig.yamlls.setup({
             capabilities = capabilities,
