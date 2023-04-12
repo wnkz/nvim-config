@@ -82,11 +82,9 @@ return {
         end,
         dependencies = {
             "nvim-treesitter-textobjects",
-            "playground",
             "windwp/nvim-ts-autotag",
         },
     },
     { "nvim-treesitter/nvim-treesitter-textobjects", lazy = true },
-    { "nvim-treesitter/playground", lazy = true },
     { "nvim-treesitter/nvim-treesitter-context", config = true, dependencies = "nvim-treesitter", event = "VeryLazy" },
 }
