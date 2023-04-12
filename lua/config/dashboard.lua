@@ -26,7 +26,7 @@ dashboard.section.buttons.val = {
     dashboard.button("f", "   Find file", ":Telescope find_files<CR>"),
     dashboard.button("g", "   Find word", ":Telescope live_grep<CR>"),
     dashboard.button("b", "   File Browser", ":Telescope file_browser<CR>"),
-    dashboard.button("p", "   Plugins", ":Lazy<CR>"),
+    dashboard.button("p", "󰒲   Lazy", ":Lazy<CR>"),
     dashboard.button("s", "   Mason", ":Mason<CR>"),
     dashboard.button("q", "   Quit", ":qa!<CR>"),
 }
