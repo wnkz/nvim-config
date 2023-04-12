@@ -19,6 +19,8 @@ if vim.fn.has("win32") == 1 then
     dap.adapters.codelldb.executable.detached = false
 end
 
+require("dap.ext.vscode").load_launchjs(nil, { lldb = { "c" }, codelldb = { "c" } })
+
 require("dap-python").setup(masonrs.get_package("debugpy"):get_install_path() .. "/venv/bin/python")
 
 dap.configurations.c = {
