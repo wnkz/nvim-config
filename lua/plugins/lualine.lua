@@ -1,10 +1,16 @@
 local function LSP_active()
+    local active_clients = {}
     for _, client in ipairs(vim.lsp.get_active_clients()) do
         if client.attached_buffers[vim.api.nvim_get_current_buf()] and client.name ~= "null-ls" then
-            return "LSP ~ " .. client.name .. " "
+            table.insert(active_clients, client.name)
         end
     end
-    return "No LSP"
+
+    if next(active_clients) == nil then
+        return "No LSP"
+    else
+        return "LSP ~ " .. table.concat(active_clients, "|") .. " "
+    end
 end
 
 return {

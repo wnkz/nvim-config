@@ -98,5 +98,28 @@ return {
     { "tpope/vim-rhubarb", cmd = { "GBrowse" } },
     { "lewis6991/gitsigns.nvim", config = true },
     { "sindrets/diffview.nvim", cmd = { "DiffviewOpen", "DiffviewFileHistory" } },
-    -- "github/copilot.vim"
+    -- { "github/copilot.vim" },
+    {
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        event = "InsertEnter",
+        opts = {
+            suggestion = {
+                enabled = true,
+                auto_trigger = false,
+                keymap = {
+                    accept = "<M-Tab>",
+                    accept_word = "<M-w>",
+                    accept_line = "<M-l>",
+                    next = "<M-]>",
+                    prev = "<M-[>",
+                    dismiss = "<C-]>",
+                },
+            },
+            panel = {
+                enabled = true,
+                auto_refresh = false,
+            },
+        },
+    },
 }
