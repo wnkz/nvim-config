@@ -83,6 +83,7 @@ cmp.setup.filetype("gitcommit", {
     }),
 })
 
+-- May conflict with flash.nvim?
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline({ "/", "?" }, {
     mapping = cmp.mapping.preset.cmdline(),

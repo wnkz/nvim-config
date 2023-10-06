@@ -7,11 +7,8 @@ return {
             diagnostics = {
                 enable = false,
             },
-            view = {
-                hide_root_folder = true,
-            },
             renderer = {
-                root_folder_modifier = ":p:~",
+                root_folder_label = false,
                 add_trailing = true,
                 group_empty = true,
                 highlight_opened_files = "name",

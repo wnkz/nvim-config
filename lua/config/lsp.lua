@@ -68,6 +68,11 @@ require("mason-lspconfig").setup_handlers({
 
         rt.setup({
             server = {
+                settings = {
+                    check = {
+                        command = "clippy",
+                    },
+                },
                 capabilities = rt_capabilities,
                 on_attach = function(_, bufnr)
                     vim.keymap.set("n", "K", rt.hover_actions.hover_actions, { buffer = bufnr })
@@ -75,13 +80,6 @@ require("mason-lspconfig").setup_handlers({
             },
             dap = {
                 adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
-            },
-        })
-    end,
-    ["tsserver"] = function()
-        require("typescript").setup({
-            server = {
-                capabilities = capabilities,
             },
         })
     end,

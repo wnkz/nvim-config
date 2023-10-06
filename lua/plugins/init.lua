@@ -24,10 +24,9 @@ return {
     },
     {
         "akinsho/toggleterm.nvim",
-        branch = "main",
+        version = "*",
         opts = {
             open_mapping = [[<c-\>]],
-            terminal_mappings = true,
             direction = "float",
         },
         keys = { [[<c-\>]] },
@@ -40,7 +39,14 @@ return {
             "ToggleTermSendVisualSelection",
         },
     },
-    { "Wansmer/treesj", dependencies = "nvim-treesitter", config = true },
+    {
+        "Wansmer/treesj",
+        dependencies = "nvim-treesitter",
+        keys = {
+            { "J", "<cmd>TSJToggle<cr>", desc = "Join Toggle" },
+        },
+        opts = { use_default_keymaps = false, max_join_length = 150 },
+    },
 
     -- UI / UX
     {
@@ -53,20 +59,10 @@ return {
     { "chentoast/marks.nvim", opts = { signs = true, mappings = {} }, event = "BufEnter" },
     {
         "lukas-reineke/indent-blankline.nvim",
+        main = "ibl",
         opts = {
-            space_char_blankline = " ",
-            show_end_of_line = false,
-            show_current_context = true,
-            use_treesitter = true,
-            buftype_exclude = { "terminal" },
-            filetype_exclude = {
-                "alpha",
-                "dashboard",
-                "help",
-                "lazy",
-                "lsp-installer",
-                "mason",
-                "packer",
+            indent = {
+                char = "│",
             },
         },
         event = "VimEnter",
@@ -75,7 +71,7 @@ return {
         "Shatur/neovim-session-manager",
         config = function()
             require("session_manager").setup({
-                autoload_mode = require("session_manager.config").AutoloadMode.CurrentDir,
+                autoload_mode = require("session_manager.config").AutoloadMode.Disabled,
             })
         end,
         event = "VimEnter",
@@ -92,6 +88,20 @@ return {
     { "ellisonleao/glow.nvim", cmd = { "Glow" }, config = true },
     { "wfxr/minimap.vim", cmd = { "Minimap", "MinimapToggle" } },
     { "norcalli/nvim-colorizer.lua", config = true, event = "VeryLazy" },
+    {
+        "folke/flash.nvim",
+        event = "VeryLazy",
+        ---@type Flash.Config
+        opts = {},
+        -- stylua: ignore
+        keys = {
+            { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+            { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+            { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+            { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+            { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+        },
+    },
 
     -- Git / GitHub
     { "tpope/vim-fugitive", cmd = { "G", "Git" } },
@@ -106,7 +116,7 @@ return {
         opts = {
             suggestion = {
                 enabled = true,
-                auto_trigger = false,
+                auto_trigger = true,
                 keymap = {
                     accept = "<M-Tab>",
                     accept_word = "<M-w>",
@@ -122,4 +132,5 @@ return {
             },
         },
     },
+    { "wintermute-cell/gitignore.nvim", cmd = { "Gitignore" } },
 }
