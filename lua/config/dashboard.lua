@@ -62,7 +62,7 @@ vim.api.nvim_create_autocmd("BufUnload", {
     group = group,
     pattern = "<buffer>",
     callback = function()
-        vim.opt.showtabline = 2
+        vim.opt.showtabline = 1
         vim.opt.showmode = true
         vim.opt.laststatus = 3
         vim.opt.showcmd = true

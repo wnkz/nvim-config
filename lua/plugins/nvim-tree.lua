@@ -1,6 +1,6 @@
 return {
     {
-        "kyazdani42/nvim-tree.lua",
+        "nvim-tree/nvim-tree.lua",
         opts = {
             disable_netrw = true,
             hijack_cursor = true,
@@ -28,6 +28,11 @@ return {
                 },
             },
         },
-        cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeFocus", "NvimTreeFindFileToggle" },
+        cmd = { "NvimTreeOpen", "NvimTreeToggle", "NvimTreeFindFile", "NvimTreeFindFileToggle" },
+        keys = {
+            { "<C-n>", vim.cmd.NvimTreeToggle },
+            { "<leader>n", vim.cmd.NvimTreeFindFileToggle },
+            { "<leader>r", vim.cmd.NvimTreeRefresh },
+        },
     },
 }
