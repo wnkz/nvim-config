@@ -18,9 +18,12 @@ return {
     { "kylechui/nvim-surround", version = "*", config = true, event = "VeryLazy" },
     {
         "folke/which-key.nvim",
-        config = true,
-        cmd = "WhichKey",
         event = "VeryLazy",
+        init = function()
+            vim.o.timeout = true
+            vim.o.timeoutlen = 300
+        end,
+        opts = {},
     },
     {
         "akinsho/toggleterm.nvim",
@@ -46,6 +49,34 @@ return {
             { "J", "<cmd>TSJToggle<cr>", desc = "Join Toggle" },
         },
         opts = { use_default_keymaps = false, max_join_length = 150 },
+    },
+    {
+        "ThePrimeagen/harpoon",
+        opts = {
+            -- Use a dynamic width for the Harpoon popup menu
+            menu = {
+                width = vim.api.nvim_win_get_width(0) - 4,
+            },
+        },
+        -- stylua: ignore
+        keys = {
+            { "<leader>ha", function() require("harpoon.mark").add_file() end, desc = "Add file to Harpoon" },
+            { "<leader>hu", function() require("harpoon.ui").toggle_quick_menu() end, desc = "Harpoon UI" },
+            { "<leader>hh", function() require("harpoon.ui").nav_next() end, desc = "Next Harpoon file" },
+            { "<leader>hp", function() require("harpoon.ui").nav_next() end, desc = "Prev Harpoon file" },
+            { "<leader>h1", function() require("harpoon.ui").nav_file(1) end, desc = "Harpoon file #1" },
+            { "<leader>h2", function() require("harpoon.ui").nav_file(2) end, desc = "Harpoon file #2" },
+            { "<leader>h3", function() require("harpoon.ui").nav_file(3) end, desc = "Harpoon file #3" },
+            { "<leader>h4", function() require("harpoon.ui").nav_file(4) end, desc = "Harpoon file #4" },
+            { "<leader>fm", ":Telescope harpoon marks<cr>" },
+        },
+    },
+    {
+        "mbbill/undotree",
+        keys = {
+            { "<leader>u", vim.cmd.UndotreeToggle, desc = "Undo Tree" },
+        },
+        cmd = { "UndotreeToggle" },
     },
 
     -- UI / UX
@@ -74,6 +105,10 @@ return {
                 autoload_mode = require("session_manager.config").AutoloadMode.Disabled,
             })
         end,
+        keys = {
+            { "<leader>ss", ":SessionManager save_current_session<cr>", desc = "Save Session" },
+            { "<leader>sl", ":SessionManager load_current_dir_session<cr>", desc = "Load Session" },
+        },
         event = "VimEnter",
     },
     { "stevearc/dressing.nvim", event = "VeryLazy" },
@@ -86,7 +121,6 @@ return {
         event = "BufEnter",
     },
     { "ellisonleao/glow.nvim", cmd = { "Glow" }, config = true },
-    { "wfxr/minimap.vim", cmd = { "Minimap", "MinimapToggle" } },
     { "norcalli/nvim-colorizer.lua", config = true, event = "VeryLazy" },
     {
         "folke/flash.nvim",

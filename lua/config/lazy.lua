@@ -13,5 +13,8 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     { "folke/lazy.nvim", tag = "stable" },
-    { import = "plugins" },
+    {
+        import = "plugins",
+        change_detection = { enabled = true, notify = false },
+    },
 })
