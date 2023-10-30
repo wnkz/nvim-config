@@ -61,9 +61,9 @@ return {
         -- stylua: ignore
         keys = {
             { "<leader>ha", function() require("harpoon.mark").add_file() end, desc = "Add file to Harpoon" },
-            { "<leader>hu", function() require("harpoon.ui").toggle_quick_menu() end, desc = "Harpoon UI" },
+            { "<leader>hi", function() require("harpoon.ui").toggle_quick_menu() end, desc = "Harpoon UI" },
             { "<leader>hh", function() require("harpoon.ui").nav_next() end, desc = "Next Harpoon file" },
-            { "<leader>hp", function() require("harpoon.ui").nav_next() end, desc = "Prev Harpoon file" },
+            { "<leader>hl", function() require("harpoon.ui").nav_next() end, desc = "Prev Harpoon file" },
             { "<leader>h1", function() require("harpoon.ui").nav_file(1) end, desc = "Harpoon file #1" },
             { "<leader>h2", function() require("harpoon.ui").nav_file(2) end, desc = "Harpoon file #2" },
             { "<leader>h3", function() require("harpoon.ui").nav_file(3) end, desc = "Harpoon file #3" },
@@ -140,7 +140,69 @@ return {
     -- Git / GitHub
     { "tpope/vim-fugitive", cmd = { "G", "Git" } },
     { "tpope/vim-rhubarb", cmd = { "GBrowse" } },
-    { "lewis6991/gitsigns.nvim", config = true },
+    -- Detect tabstop and shiftwidth automatically
+    { "tpope/vim-sleuth" },
+    {
+        "lewis6991/gitsigns.nvim",
+        opts = {
+            on_attach = function(bufnr)
+                local gs = package.loaded.gitsigns
+
+                local function map(mode, l, r, opts)
+                    opts = opts or {}
+                    opts.buffer = bufnr
+                    vim.keymap.set(mode, l, r, opts)
+                end
+
+                -- Navigation
+                map("n", "]c", function()
+                    if vim.wo.diff then
+                        return "]c"
+                    end
+                    vim.schedule(function()
+                        gs.next_hunk()
+                    end)
+                    return "<Ignore>"
+                end, { expr = true, desc = "Next Hunk" })
+
+                map("n", "[c", function()
+                    if vim.wo.diff then
+                        return "[c"
+                    end
+                    vim.schedule(function()
+                        gs.prev_hunk()
+                    end)
+                    return "<Ignore>"
+                end, { expr = true, desc = "Previous Hunk" })
+
+                -- Actions
+                map("n", "<leader>hs", gs.stage_hunk, { desc = "Stage Hunk" })
+                map("n", "<leader>hr", gs.reset_hunk, { desc = "Reset Hunk" })
+                map("v", "<leader>hs", function()
+                    gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+                end, { desc = "Stage Hunk" })
+                map("v", "<leader>hr", function()
+                    gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+                end, { desc = "Reset Hunk" })
+                map("n", "<leader>hS", gs.stage_buffer, { desc = "Stage Buffer" })
+                map("n", "<leader>hu", gs.undo_stage_hunk, { desc = "Undo Stage Hunk" })
+                map("n", "<leader>hR", gs.reset_buffer, { desc = "Reset Buffer" })
+                map("n", "<leader>hp", gs.preview_hunk, { desc = "Preview hunk" })
+                map("n", "<leader>hb", function()
+                    gs.blame_line({ full = true })
+                end, { desc = "Blame Line" })
+                map("n", "<leader>tb", gs.toggle_current_line_blame, { desc = "Toggle Blame" })
+                map("n", "<leader>hd", gs.diffthis, { desc = "Diff This" })
+                map("n", "<leader>hD", function()
+                    gs.diffthis("~")
+                end, { desc = "Diff This" })
+                map("n", "<leader>td", gs.toggle_deleted, { desc = "Toggle Deleted" })
+
+                -- Text object
+                map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
+            end,
+        },
+    },
     { "sindrets/diffview.nvim", cmd = { "DiffviewOpen", "DiffviewFileHistory" } },
     -- { "github/copilot.vim" },
     {
