@@ -183,8 +183,5 @@ vim.api.nvim_create_autocmd("LspAttach", {
             vim.tbl_extend("keep", opts, { desc = "[LSP] Code Action" })
         )
         vim.keymap.set("n", "gr", vim.lsp.buf.references, vim.tbl_extend("keep", opts, { desc = "[LSP] References" }))
-        vim.keymap.set("n", "<space>f", function()
-            vim.lsp.buf.format({ async = true })
-        end, vim.tbl_extend("keep", opts, { desc = "[LSP] Format" }))
     end,
 })
