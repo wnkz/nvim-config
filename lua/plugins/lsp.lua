@@ -5,6 +5,7 @@ return {
         dependencies = {
             "mason-lspconfig.nvim",
             "neodev.nvim",
+            { "j-hui/fidget.nvim", tag = "legacy", opts = {} },
         },
         config = function()
             require("config.lsp")

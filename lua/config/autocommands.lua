@@ -24,3 +24,12 @@ vim.api.nvim_create_autocmd("TermOpen", {
         vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], opts)
     end,
 })
+
+local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+vim.api.nvim_create_autocmd("TextYankPost", {
+    callback = function()
+        vim.highlight.on_yank()
+    end,
+    group = highlight_group,
+    pattern = "*",
+})
