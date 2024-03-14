@@ -8,6 +8,7 @@ vim.g.loaded_netrwPlugin = 1
 
 vim.opt.mouse = "a"
 vim.opt.number = true
+vim.opt.relativenumber = true
 vim.opt.cursorline = true
 vim.opt.wrap = false
 vim.opt.undofile = true
