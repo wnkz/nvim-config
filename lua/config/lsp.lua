@@ -126,10 +126,10 @@ require("mason-lspconfig").setup_handlers({
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-vim.keymap.set("n", "<space>e", vim.diagnostic.open_float)
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
-vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist)
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
+vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
+vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
@@ -138,50 +138,35 @@ vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(ev)
         -- Buffer local mappings.
         -- See `:help vim.lsp.*` for documentation on any of the below functions
-        local opts = { buffer = ev.buf }
-        vim.keymap.set("n", "gD", vim.lsp.buf.declaration, vim.tbl_extend("keep", opts, { desc = "[LSP] Declaration" }))
-        vim.keymap.set("n", "gd", vim.lsp.buf.definition, vim.tbl_extend("keep", opts, { desc = "[LSP] Definition" }))
-        vim.keymap.set("n", "K", vim.lsp.buf.hover, vim.tbl_extend("keep", opts, { desc = "[LSP] Hover" }))
-        vim.keymap.set(
-            "n",
-            "gi",
-            vim.lsp.buf.implementation,
-            vim.tbl_extend("keep", opts, { desc = "[LSP] Implementation" })
-        )
-        vim.keymap.set(
-            "n",
-            "<C-k>",
-            vim.lsp.buf.signature_help,
-            vim.tbl_extend("keep", opts, { desc = "[LSP] Signature help" })
-        )
-        vim.keymap.set(
-            "n",
-            "<space>wa",
-            vim.lsp.buf.add_workspace_folder,
-            vim.tbl_extend("keep", opts, { desc = "[LSP] Add Workspace folder" })
-        )
-        vim.keymap.set(
-            "n",
-            "<space>wr",
-            vim.lsp.buf.remove_workspace_folder,
-            vim.tbl_extend("keep", opts, { desc = "[LSP] Remove Workspace folder" })
-        )
-        vim.keymap.set("n", "<space>wl", function()
+        local function map(mode, l, r, opts)
+            opts = opts or {}
+            opts.buffer = ev.buf
+            if opts.desc then
+                opts.desc = "[LSP] " .. opts.desc
+            end
+            vim.keymap.set(mode, l, r, opts)
+        end
+
+        -- stylua: ignore start
+        map("n", "<space>rn", vim.lsp.buf.rename, { desc = "[R]e[n]ame" })
+        map("n", "<space>ca", vim.lsp.buf.code_action, { desc = "[C]ode [A]ction" })
+
+        map("n", "gd", require("telescope.builtin").lsp_definitions, { desc = "[G]oto [D]efinition" })
+        map("n", "gr", require("telescope.builtin").lsp_references, { desc = "[G]oto [R]eferences" })
+        map("n", "gi", require("telescope.builtin").lsp_implementations, { desc = "[G]oto [I]mplementation" })
+        map("n", "<space>D", require("telescope.builtin").lsp_type_definitions, { desc = "Type [D]efinition" })
+        map("n", "<space>ds", require("telescope.builtin").lsp_document_symbols, { desc = "[D]ocument [S]ymbols" })
+        map("n", "<space>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, { desc = "[W]orkspace [S]ymbols" })
+        map("n", "gD", vim.lsp.buf.declaration, { desc = "[G]oto [D]eclaration" })
+
+        map("n", "K", vim.lsp.buf.hover, { desc = "Hover Documentation" })
+        map("n", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature Documentation" })
+
+        map("n", "<space>wa", vim.lsp.buf.add_workspace_folder, { desc = "[W]orkspace [A]dd folder" })
+        map("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, { desc = "[W]orkspace [R]emove folder" })
+        map("n", "<space>wl", function()
             print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-        end, vim.tbl_extend("keep", opts, { desc = "[LSP] List Workspace folder" }))
-        vim.keymap.set(
-            "n",
-            "<space>D",
-            vim.lsp.buf.type_definition,
-            vim.tbl_extend("keep", opts, { desc = "[LSP] Type definition" })
-        )
-        vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, vim.tbl_extend("keep", opts, { desc = "[LSP] Rename" }))
-        vim.keymap.set(
-            "n",
-            "<space>ca",
-            vim.lsp.buf.code_action,
-            vim.tbl_extend("keep", opts, { desc = "[LSP] Code Action" })
-        )
-        vim.keymap.set("n", "gr", vim.lsp.buf.references, vim.tbl_extend("keep", opts, { desc = "[LSP] References" }))
+        end, { desc = "[W]orkspace [L]ist folder" })
+        -- stylua: ignore end
     end,
 })

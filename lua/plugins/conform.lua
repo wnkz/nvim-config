@@ -15,12 +15,25 @@ return {
     opts = {
         formatters_by_ft = {
             c = { "clang_format" },
-            javascript = { { "prettierd", "prettier" } },
             lua = { "stylua" },
             python = { "isort", "ruff_format" },
             rust = { "rustfmt" },
             sh = { "shfmt" },
+            sql = { "sqlfmt" },
             terraform = { "terraform_fmt" },
+            hcl = { "packer_fmt" },
+
+            astro = { { "prettierd", "prettier" } },
+            css = { { "prettierd", "prettier" } },
+            javascript = { { "prettierd", "prettier" } },
+            json = { { "prettierd", "prettier" } },
+            jsonc = { { "prettierd", "prettier" } },
+            markdown = { { "prettierd", "prettier" } },
+            typescript = { { "prettierd", "prettier" } },
+            typescriptreact = { { "prettierd", "prettier" } },
+            vue = { { "prettierd", "prettier" } },
+            yaml = { { "prettierd", "prettier" } },
+
             -- Use the "_" filetype to run formatters on filetypes that don't
             -- have other formatters configured.
             ["_"] = { "trim_whitespace", "trim_newlines" },
@@ -31,6 +44,10 @@ return {
             },
             rustfmt = {
                 args = { "--edition=2021" },
+            },
+            packer_fmt = {
+                command = "packer",
+                args = { "fmt", "-" },
             },
         },
     },
