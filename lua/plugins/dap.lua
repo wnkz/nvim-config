@@ -15,6 +15,7 @@ return {
         end,
         dependencies = {
             { "rcarriga/nvim-dap-ui" },
+            { "nvim-neotest/nvim-nio" },
             { "nvim-dap-virtual-text" },
         },
         -- stylua: ignore
