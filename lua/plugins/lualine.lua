@@ -24,7 +24,10 @@ return {
             },
             sections = {
                 lualine_a = { "mode" },
-                lualine_b = { "branch", "diff" },
+                lualine_b = {
+                    "branch",
+                    "diff",
+                },
                 lualine_c = {
                     { "filename", path = 1 },
                 },
@@ -45,7 +48,11 @@ return {
             extensions = {
                 "fugitive",
                 "fzf",
+                "lazy",
+                "mason",
+                "nvim-dap-ui",
                 "nvim-tree",
+                "quickfix",
                 "toggleterm",
             },
         },
