@@ -95,17 +95,15 @@ return {
         event = "VimEnter",
     },
     {
-        "Shatur/neovim-session-manager",
-        config = function()
-            require("session_manager").setup({
-                autoload_mode = require("session_manager.config").AutoloadMode.Disabled,
-            })
-        end,
+        "folke/persistence.nvim",
+        event = "BufReadPre", -- this will only start session saving when an actual file was opened
+        opts = {},
+        -- stylua: ignore
         keys = {
-            { "<leader>ss", ":SessionManager save_current_session<cr>", desc = "Save Session" },
-            { "<leader>sl", ":SessionManager load_current_dir_session<cr>", desc = "Load Session" },
+            { "<leader>qs", function() require("persistence").load() end, desc = "Load Session" },
+            { "<leader>qS", function() require("persistence").select() end, desc = "Select Session" },
+            { "<leader>ql", function() require("persistence").load({last = true}) end, desc = "Load Last Session" },
         },
-        event = "VimEnter",
     },
     { "stevearc/dressing.nvim", event = "VeryLazy" },
     { "mechatroner/rainbow_csv", event = "BufEnter *.csv" },

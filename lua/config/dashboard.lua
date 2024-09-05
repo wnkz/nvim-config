@@ -20,7 +20,7 @@ dashboard.section.header.val = header
 dashboard.section.header.opts.hl = "AlphaHeader"
 
 dashboard.section.buttons.val = {
-    dashboard.button("l", "   Load session", ":SessionManager load_current_dir_session<CR>"),
+    dashboard.button("l", "   Load session", ":lua require('persistence').load()<CR>"),
     dashboard.button("e", "   New file", ":ene <BAR> startinsert <CR>"),
     dashboard.button("r", "   Recently used files", ":Telescope frecency<CR>"),
     dashboard.button("f", "   Find file", ":Telescope find_files<CR>"),
