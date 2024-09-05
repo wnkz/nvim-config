@@ -149,7 +149,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
         -- stylua: ignore start
         map("n", "<space>rn", vim.lsp.buf.rename, { desc = "[R]e[n]ame" })
-        map("n", "<space>ca", vim.lsp.buf.code_action, { desc = "[C]ode [A]ction" })
+        -- map("n", "<space>ca", vim.lsp.buf.code_action, { desc = "[C]ode [A]ction" })
+        map("n", "<space>ca", function()
+            require("tiny-code-action").code_action()
+        end, { desc = "[C]ode [A]ction" })
 
         map("n", "gd", require("telescope.builtin").lsp_definitions, { desc = "[G]oto [D]efinition" })
         map("n", "gr", require("telescope.builtin").lsp_references, { desc = "[G]oto [R]eferences" })

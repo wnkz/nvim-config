@@ -34,4 +34,15 @@ return {
         lazy = true,
     },
     { "simrat39/rust-tools.nvim", lazy = true },
+    {
+        "rachartier/tiny-code-action.nvim",
+        dependencies = {
+            { "nvim-lua/plenary.nvim" },
+            { "nvim-telescope/telescope.nvim" },
+        },
+        event = "LspAttach",
+        config = function()
+            require("tiny-code-action").setup()
+        end,
+    },
 }
