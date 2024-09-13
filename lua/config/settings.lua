@@ -1,5 +1,6 @@
 vim.cmd("language en_US.utf-8")
-vim.cmd("colorscheme onedark")
+
+vim.cmd.colorscheme("nordfox")
 
 -- NvimTree
 -- disable netrw at the very start of your init.lua (strongly advised)
@@ -18,6 +19,7 @@ vim.opt.scrolloff = 3 -- minimum lines to keep above and below cursor when scrol
 vim.opt.laststatus = 3 -- global status line
 vim.opt.signcolumn = "auto:2"
 vim.opt.hlsearch = false
+vim.opt.background = "dark"
 
 vim.opt.updatetime = 250
 vim.opt.timeoutlen = 300
@@ -42,7 +44,7 @@ vim.opt.breakindent = true
 -- folding
 vim.opt.foldenable = false
 vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
 -- listchars
 vim.opt.list = true
