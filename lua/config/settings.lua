@@ -1,6 +1,6 @@
 vim.cmd("language en_US.utf-8")
 
-vim.cmd.colorscheme("nordfox")
+vim.cmd.colorscheme("nordern")
 
 -- NvimTree
 -- disable netrw at the very start of your init.lua (strongly advised)
@@ -47,11 +47,15 @@ vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
 -- listchars
+vim.opt.listchars = {
+    tab = "▸ ",
+    trail = "·",
+    extends = "›",
+    precedes = "‹",
+    nbsp = "␣",
+    eol = "↴",
+}
 vim.opt.list = true
-vim.opt.listchars:append("space:⋅")
-vim.opt.listchars:append("tab:»⋅")
-vim.opt.listchars:append("trail:⋅")
-vim.opt.listchars:append("nbsp:⋅")
 
 -- Diagnostics
 vim.diagnostic.config({
