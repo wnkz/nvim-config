@@ -115,7 +115,7 @@ return {
         event = "BufEnter",
     },
     { "ellisonleao/glow.nvim", cmd = { "Glow" }, config = true },
-    { "norcalli/nvim-colorizer.lua", config = true, event = "VeryLazy" },
+    { "norcalli/nvim-colorizer.lua", opts = { "*" }, event = "VeryLazy" },
     {
         "folke/flash.nvim",
         event = "VeryLazy",
