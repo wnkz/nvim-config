@@ -8,8 +8,8 @@ return {
                 transparent = false, -- lualine center bar transparency
             },
             highlights = {
-                AlphaHeader = { fg = "$green" },
-                AlphaFooter = { fg = "$green" },
+                DashboardHeader = { fg = "$green" },
+                DashboardFooter = { fg = "$blue" },
                 DapBreakpoint = { fg = "$red" },
                 DapStopped = { fg = "$yellow" },
             },

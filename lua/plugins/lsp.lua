@@ -4,8 +4,13 @@ return {
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
             "mason-lspconfig.nvim",
-            "neodev.nvim",
-            { "j-hui/fidget.nvim", tag = "legacy", opts = {} },
+            {
+                "mrded/nvim-lsp-notify",
+                opts = {
+                    notify = require("notify"),
+                },
+                dependencies = { "rcarriga/nvim-notify" },
+            },
         },
         config = function()
             require("config.lsp")
@@ -34,12 +39,11 @@ return {
         dependencies = { "mason.nvim" },
     },
     {
-        "folke/neodev.nvim",
-        opts = {
-            library = { plugins = { "nvim-dap-ui" }, types = true },
-        },
-        lazy = true,
+        "folke/lazydev.nvim",
+        ft = "lua",
+        opts = {},
     },
+    { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
     { "simrat39/rust-tools.nvim", lazy = true },
     {
         "rachartier/tiny-code-action.nvim",
