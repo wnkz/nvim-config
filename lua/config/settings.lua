@@ -3,9 +3,9 @@ vim.cmd.colorscheme("monoglow")
 
 -- Diagnostics
 vim.diagnostic.config({
-    virtual_text = true,
-    signs = true,
-    underline = false,
-    update_in_insert = false,
-    severity_sort = false,
+  virtual_text = true,
+  signs = true,
+  underline = false,
+  update_in_insert = false,
+  severity_sort = false,
 })

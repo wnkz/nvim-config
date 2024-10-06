@@ -53,10 +53,10 @@ vim.o.foldenable = true
 -- listchars
 vim.opt.list = true
 vim.opt.listchars = {
-    tab = "▸ ",
-    trail = "·",
-    extends = "›",
-    precedes = "‹",
-    nbsp = "␣",
-    eol = "↴",
+  tab = "▸ ",
+  trail = "·",
+  extends = "›",
+  precedes = "‹",
+  nbsp = "␣",
+  eol = "↴",
 }
