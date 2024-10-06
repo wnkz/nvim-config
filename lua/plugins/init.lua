@@ -3,34 +3,26 @@ return {
     { "nvim-lua/plenary.nvim", lazy = true },
     { "kyazdani42/nvim-web-devicons", lazy = true },
 
-    -- QoL
+    -- NOTE: QoL
+
+    -- Detect tabstop and shiftwidth automatically
+    { "tpope/vim-sleuth" },
     {
         "folke/ts-comments.nvim",
         event = "VeryLazy",
         opts = {},
     },
     {
-        "echasnovski/mini.pairs",
-        event = "VeryLazy",
-        opts = {
-            modes = { insert = true, command = true, terminal = false },
-            -- skip autopair when next character is one of these
-            skip_next = [=[[%w%%%'%[%"%.%`%$]]=],
-            -- skip autopair when the cursor is inside these treesitter nodes
-            skip_ts = { "string" },
-            -- skip autopair when next character is closing pair
-            -- and there are more closing pairs than opening pairs
-            skip_unbalanced = true,
-            -- better deal with markdown code blocks
-            markdown = true,
-        },
-    },
-    {
-        "echasnovski/mini.ai",
-        event = "VeryLazy",
-        opts = function()
+        "echasnovski/mini.nvim",
+        config = function()
+            -- Better Around/Inside textobjects
+            --
+            -- Examples:
+            --  - va)  - [V]isually select [A]round [)]paren
+            --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
+            --  - ci'  - [C]hange [I]nside [']quote
             local ai = require("mini.ai")
-            return {
+            ai.setup({
                 n_lines = 500,
                 custom_textobjects = {
                     o = ai.gen_spec.treesitter({ -- code block
@@ -53,10 +45,29 @@ return {
                     u = ai.gen_spec.function_call(), -- u for "Usage"
                     U = ai.gen_spec.function_call({ name_pattern = "[%w_]" }), -- without dot in function name
                 },
-            }
+            })
+
+            require("mini.pairs").setup({
+                modes = { insert = true, command = true, terminal = false },
+                -- skip autopair when next character is one of these
+                skip_next = [=[[%w%%%'%[%"%.%`%$]]=],
+                -- skip autopair when the cursor is inside these treesitter nodes
+                skip_ts = { "string" },
+                -- skip autopair when next character is closing pair
+                -- and there are more closing pairs than opening pairs
+                skip_unbalanced = true,
+                -- better deal with markdown code blocks
+                markdown = true,
+            })
+
+            -- Add/delete/replace surroundings (brackets, quotes, etc.)
+            --
+            -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
+            -- - sd'   - [S]urround [D]elete [']quotes
+            -- - sr)'  - [S]urround [R]eplace [)] [']
+            require("mini.surround").setup()
         end,
     },
-    { "kylechui/nvim-surround", version = "*", config = true, event = "VeryLazy" },
     {
         "folke/which-key.nvim",
         event = "VeryLazy",
@@ -88,24 +99,22 @@ return {
         opts = { use_default_keymaps = false, max_join_length = 150 },
     },
     {
-        "ThePrimeagen/harpoon",
+        "cbochs/grapple.nvim",
         opts = {
-            -- Use a dynamic width for the Harpoon popup menu
-            menu = {
-                width = vim.api.nvim_win_get_width(0) - 4,
-            },
+            scope = "git",
         },
-        -- stylua: ignore
+        event = { "BufReadPost", "BufNewFile" },
+        cmd = "Grapple",
         keys = {
-            { "<leader>ha", function() require("harpoon.mark").add_file() end, desc = "Add file to Harpoon" },
-            { "<leader>hi", function() require("harpoon.ui").toggle_quick_menu() end, desc = "Harpoon UI" },
-            { "<leader>hh", function() require("harpoon.ui").nav_next() end, desc = "Next Harpoon file" },
-            { "<leader>hl", function() require("harpoon.ui").nav_next() end, desc = "Prev Harpoon file" },
-            { "<leader>h1", function() require("harpoon.ui").nav_file(1) end, desc = "Harpoon file #1" },
-            { "<leader>h2", function() require("harpoon.ui").nav_file(2) end, desc = "Harpoon file #2" },
-            { "<leader>h3", function() require("harpoon.ui").nav_file(3) end, desc = "Harpoon file #3" },
-            { "<leader>h4", function() require("harpoon.ui").nav_file(4) end, desc = "Harpoon file #4" },
-            { "<leader>fm", ":Telescope harpoon marks<cr>" },
+            { "<leader>m", "<cmd>Grapple toggle<cr>", desc = "Grapple toggle tag" },
+            { "<leader>M", "<cmd>Grapple toggle_tags<cr>", desc = "Grapple open tags window" },
+            { "H", "<cmd>Grapple cycle_tags next<cr>", desc = "Grapple cycle next tag" },
+            { "L", "<cmd>Grapple cycle_tags prev<cr>", desc = "Grapple cycle previous tag" },
+            { "<leader>1", "<cmd>Grapple select index=1<cr>", desc = "Grapple tag #1" },
+            { "<leader>2", "<cmd>Grapple select index=2<cr>", desc = "Grapple tag #2" },
+            { "<leader>3", "<cmd>Grapple select index=3<cr>", desc = "Grapple tag #3" },
+            { "<leader>4", "<cmd>Grapple select index=4<cr>", desc = "Grapple tag #4" },
+            { "<leader>fm", "<cmd>Telescope grapple tags<cr>" },
         },
     },
     {
@@ -121,7 +130,7 @@ return {
         cmd = "GrugFar",
         keys = {
             {
-                "<leader>sr",
+                "<leader>sR",
                 function()
                     local grug = require("grug-far")
                     local ext = vim.bo.buftype == "" and vim.fn.expand("%:e")
@@ -184,9 +193,33 @@ return {
             },
         },
     },
+    {
+        "folke/todo-comments.nvim",
+        event = "VimEnter",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        opts = { signs = false },
+    },
 
-    -- UI / UX
+    -- NOTE: UI / UX
     { "chentoast/marks.nvim", opts = { signs = true, mappings = {} }, event = "BufEnter" },
+    {
+        "kevinhwang91/nvim-ufo",
+        event = "VimEnter",
+        disabled = true,
+        dependencies = { "kevinhwang91/promise-async" },
+        config = function()
+            require("ufo").setup({
+                provider_selector = function(bufnr, filetype, buftype)
+                    return { "treesitter", "indent" }
+                end,
+            })
+        end,
+        -- stylua: ignore 
+        keys = {
+            { "zR", function() require("ufo").openAllFolds() end },
+            { "zM", function() require("ufo").closeAllFolds() end },
+        },
+    },
     {
         "lukas-reineke/indent-blankline.nvim",
         main = "ibl",
@@ -226,14 +259,6 @@ return {
     },
     { "stevearc/dressing.nvim", event = "VeryLazy" },
     { "mechatroner/rainbow_csv", event = "BufEnter *.csv" },
-    { "anuvyklack/pretty-fold.nvim", config = true, event = "BufEnter" },
-    {
-        "anuvyklack/fold-preview.nvim",
-        dependencies = { "anuvyklack/keymap-amend.nvim" },
-        config = true,
-        event = "BufEnter",
-    },
-    { "ellisonleao/glow.nvim", cmd = { "Glow" }, config = true },
     { "norcalli/nvim-colorizer.lua", opts = { "*" }, event = "VeryLazy" },
     {
         "folke/flash.nvim",
@@ -274,15 +299,75 @@ return {
             end,
         },
     },
+    {
+        "stevearc/oil.nvim",
+        ---@module 'oil'
+        ---@type oil.SetupOpts
+        opts = {
+            default_file_explorer = false,
+        },
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+    },
+    {
+        "stevearc/quicker.nvim",
+        event = "FileType qf",
+        ---@module "quicker"
+        ---@type quicker.SetupOptions
+        opts = {
+            keys = {
+                {
+                    ">",
+                    function()
+                        require("quicker").expand({ before = 2, after = 2, add_to_existing = true })
+                    end,
+                    desc = "Expand quickfix context",
+                },
+                {
+                    "<",
+                    function()
+                        require("quicker").collapse()
+                    end,
+                    desc = "Collapse quickfix context",
+                },
+            },
+        },
+        -- stylua: ignore
+        keys = {
+            { "<leader>qf", function() require("quicker").toggle() end, desc = "Toggle quickfix" },
+            { "<leader>ll", function() require("quicker").toggle({ loclist = true }) end, desc = "Toggle loclist" },
+        },
+    },
+    {
+        "OXY2DEV/helpview.nvim",
+        lazy = false, -- Recommended
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+        },
+    },
+    {
+        "nvchad/minty",
+        lazy = true,
+        dependencies = { { "nvchad/volt", lazy = true } },
+        -- stylua: ignore
+        keys = {
+            { "<leader>cp", function() require("minty.huefy").open() end, desc = "[C]olor [P]icker" },
+            { "<leader>cs", function() require("minty.shades").open() end, desc = "[C]olor [S]hades" },
+        },
+    },
 
-    -- Git / GitHub
+    -- NOTE: Git / GitHub
     { "tpope/vim-fugitive", cmd = { "G", "Git" } },
     { "tpope/vim-rhubarb", cmd = { "GBrowse" } },
-    -- Detect tabstop and shiftwidth automatically
-    { "tpope/vim-sleuth" },
     {
         "lewis6991/gitsigns.nvim",
         opts = {
+            signs = {
+                add = { text = "+" },
+                change = { text = "~" },
+                delete = { text = "_" },
+                topdelete = { text = "‾" },
+                changedelete = { text = "~" },
+            },
             on_attach = function(bufnr)
                 local gs = package.loaded.gitsigns
 
@@ -328,7 +413,6 @@ return {
         },
     },
     { "sindrets/diffview.nvim", cmd = { "DiffviewOpen", "DiffviewFileHistory" } },
-    -- { "github/copilot.vim" },
     {
         "zbirenbaum/copilot.lua",
         cmd = "Copilot",

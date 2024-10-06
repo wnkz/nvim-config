@@ -26,7 +26,10 @@ require("lazy").setup({
     spec = {
         { import = "plugins" },
     },
-    install = { colorscheme = { "habamax" } },
+    dev = {
+        path = "~/Developer/code",
+    },
+    install = { colorscheme = { "default" } },
     checker = { enabled = true, notify = false },
     change_detection = { enabled = true, notify = false },
     performance = {

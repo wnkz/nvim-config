@@ -1,5 +1,12 @@
 return {
     {
+        "wnkz/monoglow.nvim",
+        priority = 1000,
+        lazy = false,
+        opts = {},
+        dev = true,
+    },
+    {
         "navarasu/onedark.nvim",
         opts = {
             style = "darker",
@@ -16,44 +23,45 @@ return {
         },
     },
     {
-        "fcancelinha/nordern.nvim",
-        branch = "master",
-        priority = 1000,
-        lazy = false,
-    },
-    {
-        "shaunsingh/nord.nvim",
-        config = function()
-            vim.g.nord_contrast = true
-        end,
-    },
-    {
-        "EdenEast/nightfox.nvim",
-        opts = {},
-    },
-    {
-        "projekt0n/github-nvim-theme",
-        config = function()
-            require("github-theme").setup({
-                -- ...
-            })
-        end,
-    },
-    {
-        "rmehri01/onenord.nvim",
-        opts = {},
-    },
-    {
         "folke/tokyonight.nvim",
         opts = {},
     },
     {
-        "rose-pine/neovim",
-        name = "rose-pine",
-        opts = {},
+        "RRethy/nvim-base16",
     },
-    {
-        "olivercederborg/poimandres.nvim",
-        opts = {},
-    },
+    -- {
+    --     "fcancelinha/nordern.nvim",
+    --     branch = "master",
+    -- },
+    -- {
+    --     "shaunsingh/nord.nvim",
+    --     config = function()
+    --         vim.g.nord_contrast = true
+    --     end,
+    -- },
+    -- {
+    --     "EdenEast/nightfox.nvim",
+    --     opts = {},
+    -- },
+    -- {
+    --     "projekt0n/github-nvim-theme",
+    --     config = function()
+    --         require("github-theme").setup({
+    --             -- ...
+    --         })
+    --     end,
+    -- },
+    -- {
+    --     "rmehri01/onenord.nvim",
+    --     opts = {},
+    -- },
+    -- {
+    --     "rose-pine/neovim",
+    --     name = "rose-pine",
+    --     opts = {},
+    -- },
+    -- {
+    --     "olivercederborg/poimandres.nvim",
+    --     opts = {},
+    -- },
 }
