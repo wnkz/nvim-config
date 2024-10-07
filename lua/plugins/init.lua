@@ -159,8 +159,8 @@ return {
     keys = {
       { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
       { "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)" },
-      { "<leader>cs", "<cmd>Trouble symbols toggle<cr>", desc = "Symbols (Trouble)" },
-      { "<leader>cS", "<cmd>Trouble lsp toggle<cr>", desc = "LSP references/definitions/... (Trouble)" },
+      { "<leader>ts", "<cmd>Trouble symbols toggle<cr>", desc = "Symbols (Trouble)" },
+      { "<leader>tS", "<cmd>Trouble lsp toggle<cr>", desc = "LSP references/definitions/... (Trouble)" },
       { "<leader>xL", "<cmd>Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
       { "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List (Trouble)" },
       {
@@ -259,7 +259,7 @@ return {
   },
   { "stevearc/dressing.nvim", event = "VeryLazy" },
   { "mechatroner/rainbow_csv", event = "BufEnter *.csv" },
-  { "norcalli/nvim-colorizer.lua", opts = { "*" }, event = "VeryLazy" },
+  { "brenoprata10/nvim-highlight-colors", opts = {}, event = "VeryLazy" },
   {
     "folke/flash.nvim",
     event = "VeryLazy",

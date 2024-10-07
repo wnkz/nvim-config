@@ -22,13 +22,9 @@ return {
       },
     },
   },
-  {
-    "folke/tokyonight.nvim",
-    opts = {},
-  },
-  {
-    "RRethy/nvim-base16",
-  },
+  { "slugbyte/lackluster.nvim" },
+  { "folke/tokyonight.nvim" },
+  { "RRethy/nvim-base16" },
   -- {
   --     "fcancelinha/nordern.nvim",
   --     branch = "master",

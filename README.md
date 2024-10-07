@@ -5,6 +5,7 @@
 ## ✨ Features
 
 - 📦 Manage plugins with [lazy.nvim](https://github.com/folke/lazy.nvim) (`:Lazy`)
+- 🎨 Theme is [MonoGlow](https://github.com/wnkz/monoglow.nvim)
 
 ## ⚡️ Requirements
 
