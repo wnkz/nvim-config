@@ -3,19 +3,14 @@ return {
     "hrsh7th/nvim-cmp",
     event = { "InsertEnter", "CmdlineEnter" },
     dependencies = {
-      { "hrsh7th/cmp-nvim-lsp", lazy = true },
-      { "hrsh7th/cmp-nvim-lua", lazy = true },
-      { "hrsh7th/cmp-buffer", lazy = true },
-      { "hrsh7th/cmp-path", lazy = true },
-      { "hrsh7th/cmp-cmdline", lazy = true },
-      { "hrsh7th/cmp-calc", lazy = true },
-      { "hrsh7th/cmp-emoji", lazy = true },
-      { "hrsh7th/cmp-nvim-lsp-signature-help", lazy = true },
-      { "petertriho/cmp-git", lazy = true },
-      { "ray-x/cmp-treesitter", lazy = true },
-      { "onsails/lspkind-nvim", lazy = true }, -- adds vscode-like pictograms
-      { "saadparwaiz1/cmp_luasnip", lazy = true },
-      { "rcarriga/cmp-dap", lazy = true },
+      { "hrsh7th/cmp-nvim-lsp" },
+      { "hrsh7th/cmp-buffer" },
+      { "hrsh7th/cmp-path" },
+      { "hrsh7th/cmp-cmdline" },
+      { "hrsh7th/cmp-nvim-lsp-signature-help" },
+      { "petertriho/cmp-git" },
+      { "rcarriga/cmp-dap" },
+      { "onsails/lspkind-nvim" }, -- adds vscode-like pictograms
       {
         "garymjr/nvim-snippets",
         opts = {
@@ -52,7 +47,6 @@ return {
       end
 
       local cmp = require("cmp")
-      local defaults = require("cmp.config.default")()
       local lspkind = require("lspkind")
 
       cmp.setup({
@@ -93,37 +87,25 @@ return {
           end, { "i", "s" }),
         }),
         sources = cmp.config.sources({
-          {
-            name = "lazydev",
-            -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
-            group_index = 0,
-          },
-          {
-            name = "nvim_lsp",
-            entry_filter = function(entry, ctx)
-              return require("cmp.types").lsp.CompletionItemKind[entry:get_kind()] ~= "Text"
-            end,
-          },
-          { name = "nvim_lua" },
-          { name = "snippets" },
-          { name = "treesitter" },
-        }, {
+          { name = "lazydev", group_index = 0 }, -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
+          { name = "nvim_lsp" },
           { name = "nvim_lsp_signature_help" },
+          { name = "path" },
+          { name = "snippets" },
         }, {
           { name = "buffer" },
-          { name = "path" },
-          { name = "calc" },
-          { name = "emoji" },
         }),
         formatting = {
           format = lspkind.cmp_format({
-            mode = "symbol",
+            mode = "symbol_text",
+            preset = "codicons",
+            maxwidth = function()
+              return math.floor(0.45 * vim.o.columns)
+            end,
+            ellipsis_char = "...",
+            show_labelDetails = true,
           }),
         },
-        experimental = {
-          ghost_text = true,
-        },
-        sorting = defaults.sorting,
       })
 
       -- git
