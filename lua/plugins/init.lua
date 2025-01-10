@@ -249,6 +249,7 @@ return {
       { "<leader>qs", function() require("persistence").load() end, desc = "Load Session" },
       { "<leader>qS", function() require("persistence").select() end, desc = "Select Session" },
       { "<leader>ql", function() require("persistence").load({last = true}) end, desc = "Load Last Session" },
+      { "<leader>qd", function() require("persistence").stop() end, desc = "Stop session" },
     },
   },
   { "stevearc/dressing.nvim", event = "VeryLazy" },
@@ -292,6 +293,15 @@ return {
         vim.api.nvim_win_set_config(win, { zindex = 100 })
       end,
     },
+  },
+  {
+    "s1n7ax/nvim-window-picker",
+    name = "window-picker",
+    event = "VeryLazy",
+    version = "2.*",
+    config = function()
+      require("window-picker").setup()
+    end,
   },
   {
     "stevearc/oil.nvim",

@@ -33,9 +33,10 @@ return {
       python = { "isort", "ruff_format" },
       rust = { "rustfmt" },
       sh = { "shfmt" },
-      sql = { "sqlfmt" },
+      sql = { "sqlfluff" },
       terraform = { "terraform_fmt" },
       hcl = { "packer_fmt" },
+      zig = { "zigfmt" },
       ["_"] = { "trim_whitespace", "trim_newlines" },
     }
 
@@ -55,6 +56,9 @@ return {
         packer_fmt = {
           command = "packer",
           args = { "fmt", "-" },
+        },
+        sqlfluff = {
+          args = { "format", "-" },
         },
       },
     }
