@@ -10,8 +10,7 @@ return {
       -- Useful status updates for LSP.
       { "j-hui/fidget.nvim", opts = {} },
 
-      -- Allows extra capabilities provided by nvim-cmp
-      { "hrsh7th/cmp-nvim-lsp" },
+      { "saghen/blink.cmp" },
 
       {
         "rachartier/tiny-code-action.nvim",
@@ -109,9 +108,6 @@ return {
         end,
       })
 
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-
       local servers = {
         pyright = {
           settings = {
@@ -207,7 +203,7 @@ return {
             -- This handles overriding only values explicitly passed
             -- by the server configuration above. Useful when disabling
             -- certain features of an LSP (for example, turning off formatting for ts_ls)
-            server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+            server.capabilities = require("blink.cmp").get_lsp_capabilities(server.capabilities)
             require("lspconfig")[server_name].setup(server)
           end,
         },
