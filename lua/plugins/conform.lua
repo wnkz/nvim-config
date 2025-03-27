@@ -30,7 +30,7 @@ return {
     local formatters_by_ft = {
       c = { "clang_format" },
       lua = { "stylua" },
-      python = { "isort", "ruff_format" },
+      python = { "ruff_organize_imports", "ruff_format" },
       rust = { "rustfmt" },
       sh = { "shfmt" },
       sql = { "sqlfluff" },
@@ -45,6 +45,7 @@ return {
     end
 
     return {
+      notify_on_error = false,
       formatters_by_ft = formatters_by_ft,
       formatters = {
         isort = {

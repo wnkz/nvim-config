@@ -171,11 +171,29 @@ return {
       }
 
       -- use codicons for dap signs
-      vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DapBreakpoint" })
-      vim.fn.sign_define("DapBreakpointCondition", { text = "", texthl = "DapBreakpoint" })
-      vim.fn.sign_define("DapLogPoint", { text = "", texthl = "DapBreakpoint" })
-      vim.fn.sign_define("DapStopped", { text = "", texthl = "DapStopped" })
-      vim.fn.sign_define("DapBreakpointRejected", { text = "", texthl = "DapBreakpoint" })
+      -- vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DapBreakpoint" })
+      -- vim.fn.sign_define("DapBreakpointCondition", { text = "", texthl = "DapBreakpoint" })
+      -- vim.fn.sign_define("DapLogPoint", { text = "", texthl = "DapBreakpoint" })
+      -- vim.fn.sign_define("DapStopped", { text = "", texthl = "DapStopped" })
+      -- vim.fn.sign_define("DapBreakpointRejected", { text = "", texthl = "DapBreakpoint" })
+      vim.diagnostic.config({
+        signs = {
+          text = {
+            ["DapBreakpoint"] = "",
+            ["DapBreakpointCondition"] = "",
+            ["DapLogPoint"] = "",
+            ["DapStopped"] = "",
+            ["DapBreakpointRejected"] = "",
+          },
+          texthl = {
+            ["DapBreakpoint"] = "DapBreakpoint",
+            ["DapBreakpointCondition"] = "DapBreakpoint",
+            ["DapLogPoint"] = "DapBreakpoint",
+            ["DapStopped"] = "DapStopped",
+            ["DapBreakpointRejected"] = "DapBreakpoint",
+          },
+        },
+      })
     end,
   },
 }

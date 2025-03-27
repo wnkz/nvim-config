@@ -335,11 +335,6 @@ return {
         },
       },
     },
-    -- stylua: ignore
-    keys = {
-      { "<leader>qf", function() require("quicker").toggle() end, desc = "Toggle quickfix" },
-      { "<leader>ll", function() require("quicker").toggle({ loclist = true }) end, desc = "Toggle loclist" },
-    },
   },
   {
     "OXY2DEV/helpview.nvim",
