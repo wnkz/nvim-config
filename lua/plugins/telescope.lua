@@ -2,7 +2,6 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     event = "VimEnter",
-    branch = "0.1.x",
     config = function()
       local telescope_config = require("telescope.config")
       local actions = require("telescope.actions")
