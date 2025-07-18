@@ -1,16 +1,9 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      { "williamboman/mason.nvim", config = true },
-      { "williamboman/mason-lspconfig.nvim" },
-
-      -- Useful status updates for LSP.
-      { "j-hui/fidget.nvim", opts = {} },
-
+      { "j-hui/fidget.nvim", opts = {} }, -- Useful status updates for LSP.
       { "saghen/blink.cmp" },
-
       {
         "rachartier/tiny-code-action.nvim",
         dependencies = {
@@ -19,7 +12,7 @@ return {
         },
         event = "LspAttach",
         config = function()
-          require("tiny-code-action").setup()
+          require("tiny-code-action").setup({})
         end,
       },
     },
@@ -35,47 +28,47 @@ return {
       --    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
       --    function will be executed to configure the current buffer
       vim.api.nvim_create_autocmd("LspAttach", {
-        group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+        group = vim.api.nvim_create_augroup("user-lsp-attach", {}),
         callback = function(event)
           local map = function(keys, func, desc, mode)
             mode = mode or "n"
             vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
           end
 
-          map("<space>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-          -- map("<space>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
-          map("<space>ca", function()
-            require("tiny-code-action").code_action()
-          end, "[C]ode [A]ction")
+          map("grn", vim.lsp.buf.rename, "[R]e[n]ame")
+
+          -- map("gra", vim.lsp.buf.code_action, "[C]ode [A]ction")
+          -- stylua: ignore
+          map("gra", function() require("tiny-code-action").code_action({}) end, "[C]ode [A]ction")
+
+          -- Find references for the word under your cursor.
+          map("grr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
+
+          -- Jump to the implementation of the word under your cursor.
+          --  Useful when your language has ways of declaring types without an actual implementation.
+          map("gri", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
 
           -- Jump to the definition of the word under your cursor.
           --  This is where a variable was first declared, or where a function is defined, etc.
           --  To jump back, press <C-t>.
-          map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
+          map("grd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
 
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
-          map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+          map("grD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
-          -- Find references for the word under your cursor.
-          map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
+          -- Fuzzy find all the symbols in your current document.
+          --  Symbols are things like variables, functions, types, etc.
+          map("gO", require("telescope.builtin").lsp_document_symbols, "Open Document Symbols")
 
-          -- Jump to the implementation of the word under your cursor.
-          --  Useful when your language has ways of declaring types without an actual implementation.
-          map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
+          -- Fuzzy find all the symbols in your current workspace.
+          --  Similar to document symbols, except searches over your entire project.
+          map("gW", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Open Workspace Symbols")
 
           -- Jump to the type of the word under your cursor.
           --  Useful when you're not sure what type a variable is and you want to see
           --  the definition of its *type*, not where it was *defined*.
-          map("<space>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
-
-          -- Fuzzy find all the symbols in your current document.
-          --  Symbols are things like variables, functions, types, etc.
-          map("<space>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
-
-          -- Fuzzy find all the symbols in your current workspace.
-          --  Similar to document symbols, except searches over your entire project.
-          map("<space>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+          map("grt", require("telescope.builtin").lsp_type_definitions, "[G]oto [T]ype Definition")
 
           ---@param client vim.lsp.Client
           ---@param method vim.lsp.protocol.Method
@@ -96,7 +89,7 @@ return {
           -- When you move your cursor, the highlights will be cleared (the second autocommand).
           local client = vim.lsp.get_client_by_id(event.data.client_id)
           if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
-            local highlight_augroup = vim.api.nvim_create_augroup("kickstart-lsp-highlight", { clear = false })
+            local highlight_augroup = vim.api.nvim_create_augroup("user-lsp-highlight", { clear = false })
             vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
               buffer = event.buf,
               group = highlight_augroup,
@@ -110,10 +103,10 @@ return {
             })
 
             vim.api.nvim_create_autocmd("LspDetach", {
-              group = vim.api.nvim_create_augroup("kickstart-lsp-detach", { clear = true }),
+              group = vim.api.nvim_create_augroup("user-lsp-detach", { clear = true }),
               callback = function(event2)
                 vim.lsp.buf.clear_references()
-                vim.api.nvim_clear_autocmds({ group = "kickstart-lsp-highlight", buffer = event2.buf })
+                vim.api.nvim_clear_autocmds({ group = "user-lsp-highlight", buffer = event2.buf })
               end,
             })
           end
@@ -161,107 +154,21 @@ return {
         },
         virtual_lines = false,
       })
-
-      local servers = {
-        pyright = {
-          settings = {
-            python = {
-              analysis = {
-                typeCheckingMode = "off",
-              },
-            },
-          },
-        },
-        lua_ls = {
-          settings = {
-            Lua = {
-              diagnostics = {
-                -- Get the language server to recognize the `vim` global
-                globals = { "vim" },
-              },
-              -- Do not send telemetry data containing a randomized but unique identifier
-              telemetry = {
-                enable = false,
-              },
-              format = {
-                enable = false,
-              },
-            },
-          },
-        },
-        clangd = {
-          cmd = {
-            "clangd",
-            "--completion-style=detailed",
-            "--offset-encoding=utf-16", -- fix: warning: multiple different client offset_encodings
-          },
-        },
-        yamlls = {
-          settings = {
-            yaml = {
-              customTags = {
-                "!And",
-                "!If",
-                "!Not",
-                "!Equals",
-                "!Or",
-                "!FindInMap sequence",
-                "!Base64",
-                "!Cidr",
-                "!Ref",
-                "!Sub",
-                "!GetAtt",
-                "!GetAZs",
-                "!ImportValue",
-                "!Select",
-                "!Select sequence",
-                "!Split",
-                "!Join sequence",
-                "!And sequence",
-                "!If sequence",
-                "!Not sequence",
-                "!Equals sequence",
-                "!Or sequence",
-                "!FindInMap",
-                "!Join",
-                "!Sub sequence",
-                "!ImportValue sequence",
-                "!Split sequence",
-                "!Condition",
-              },
-            },
-          },
-        },
-        zls = {},
-      }
-
-      require("mason").setup()
-      require("mason-lspconfig").setup({
-        ensure_installed = {
-          "lua_ls",
-          "pyright",
-        },
-        automatic_installation = { exclude = { "zls" } },
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            -- This handles overriding only values explicitly passed
-            -- by the server configuration above. Useful when disabling
-            -- certain features of an LSP (for example, turning off formatting for ts_ls)
-            server.capabilities = require("blink.cmp").get_lsp_capabilities(server.capabilities)
-            require("lspconfig")[server_name].setup(server)
-          end,
-        },
-      })
-
-      local mason_installed_servers = require("mason-lspconfig").get_installed_servers()
-      for name, cfg in pairs(servers) do
-        if not vim.tbl_contains(mason_installed_servers, name) then
-          cfg.capabilities = require("blink.cmp").get_lsp_capabilities(cfg.capabilities)
-          require("lspconfig")[name].setup(cfg)
-        end
-      end
     end,
+  },
+  {
+    "mason-org/mason-lspconfig.nvim",
+    opts = {
+      ensure_installed = {
+        "lua_ls",
+        "pyright",
+      },
+    },
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      { "mason-org/mason.nvim", opts = {} },
+      "neovim/nvim-lspconfig",
+    },
   },
   {
     -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
