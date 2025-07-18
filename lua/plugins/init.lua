@@ -5,8 +5,7 @@ return {
 
   -- NOTE: QoL
 
-  -- Detect tabstop and shiftwidth automatically
-  { "tpope/vim-sleuth" },
+  { "NMAC427/guess-indent.nvim" }, -- Detect tabstop and shiftwidth automatically
   {
     "folke/ts-comments.nvim",
     event = "VeryLazy",
