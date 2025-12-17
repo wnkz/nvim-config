@@ -1,16 +1,11 @@
 return {
-  -- Dependencies used multiple plugins
+  -- NOTE: Core Dependencies
   { "nvim-lua/plenary.nvim", lazy = true },
-  { "kyazdani42/nvim-web-devicons", lazy = true },
+  { "nvim-tree/nvim-web-devicons", lazy = true },
+  { "mason-org/mason.nvim", opts = {} },
 
-  -- NOTE: QoL
-
-  { "NMAC427/guess-indent.nvim" }, -- Detect tabstop and shiftwidth automatically
-  {
-    "folke/ts-comments.nvim",
-    event = "VeryLazy",
-    opts = {},
-  },
+  -- NOTE: Editing Enhancements
+  { "NMAC427/guess-indent.nvim", event = "BufReadPre", opts = {} }, -- Detect tabstop and shiftwidth automatically
   {
     "echasnovski/mini.nvim",
     config = function()
@@ -62,26 +57,9 @@ return {
     },
   },
   {
-    "folke/which-key.nvim",
+    "folke/ts-comments.nvim",
     event = "VeryLazy",
     opts = {},
-  },
-  {
-    "akinsho/toggleterm.nvim",
-    version = "*",
-    opts = {
-      open_mapping = [[<c-\>]],
-      direction = "float",
-    },
-    keys = { [[<c-\>]] },
-    cmd = {
-      "ToggleTerm",
-      "TermExec",
-      "ToggleTermToggleAll",
-      "ToggleTermSendCurrentLine",
-      "ToggleTermSendVisualLines",
-      "ToggleTermSendVisualSelection",
-    },
   },
   {
     "Wansmer/treesj",
@@ -90,6 +68,21 @@ return {
       { "J", "<cmd>TSJToggle<cr>", desc = "Join Toggle" },
     },
     opts = { use_default_keymaps = false, max_join_length = 150 },
+  },
+
+  -- NOTE: Navigation & Motion
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    opts = {},
+    -- stylua: ignore
+    keys = {
+      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+      { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+      { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+      { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+    },
   },
   {
     "cbochs/grapple.nvim",
@@ -110,13 +103,33 @@ return {
       { "<leader>fm", "<cmd>Telescope grapple tags<cr>" },
     },
   },
+  { "chentoast/marks.nvim", opts = { signs = true, mappings = {} }, event = "BufEnter" },
+
+  -- NOTE: File Management
   {
-    "mbbill/undotree",
-    keys = {
-      { "<leader>u", vim.cmd.UndotreeToggle, desc = "Undo Tree" },
+    "stevearc/oil.nvim",
+    cmd = "Oil",
+    ---@module 'oil'
+    ---@type oil.SetupOpts
+    opts = {
+      default_file_explorer = false,
     },
-    cmd = { "UndotreeToggle" },
+    dependencies = { "nvim-tree/nvim-web-devicons" },
   },
+  {
+    "folke/persistence.nvim",
+    event = "BufReadPre", -- this will only start session saving when an actual file was opened
+    opts = {},
+    -- stylua: ignore
+    keys = {
+      { "<leader>qs", function() require("persistence").load() end, desc = "Load Session" },
+      { "<leader>qS", function() require("persistence").select() end, desc = "Select Session" },
+      { "<leader>ql", function() require("persistence").load({last = true}) end, desc = "Load Last Session" },
+      { "<leader>qd", function() require("persistence").stop() end, desc = "Stop session" },
+    },
+  },
+
+  -- NOTE: Search & Replace
   {
     "MagicDuck/grug-far.nvim",
     opts = { headerMaxWidth = 80 },
@@ -139,6 +152,17 @@ return {
       },
     },
   },
+
+  -- NOTE: Undo & History
+  {
+    "mbbill/undotree",
+    keys = {
+      { "<leader>u", vim.cmd.UndotreeToggle, desc = "Undo Tree" },
+    },
+    cmd = { "UndotreeToggle" },
+  },
+
+  -- NOTE: Diagnostics & Quickfix
   {
     "folke/trouble.nvim",
     cmd = { "Trouble" },
@@ -192,14 +216,44 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     opts = { signs = false },
   },
+  {
+    "stevearc/quicker.nvim",
+    event = "FileType qf",
+    ---@module "quicker"
+    ---@type quicker.SetupOptions
+    opts = {
+      keys = {
+        {
+          ">",
+          function()
+            require("quicker").expand({ before = 2, after = 2, add_to_existing = true })
+          end,
+          desc = "Expand quickfix context",
+        },
+        {
+          "<",
+          function()
+            require("quicker").collapse()
+          end,
+          desc = "Collapse quickfix context",
+        },
+      },
+    },
+  },
 
-  -- NOTE: UI / UX
-  { "chentoast/marks.nvim", opts = { signs = true, mappings = {} }, event = "BufEnter" },
+  -- NOTE: UI Enhancements
   {
     "kevinhwang91/nvim-ufo",
-    event = "VimEnter",
-    disabled = true,
+    event = "BufReadPost",
     dependencies = { "kevinhwang91/promise-async" },
+    init = function()
+      vim.keymap.set("n", "K", function()
+        local winid = require("ufo").peekFoldedLinesUnderCursor()
+        if not winid then
+          vim.lsp.buf.hover()
+        end
+      end, { desc = "Peek fold or LSP hover" })
+    end,
     config = function()
       require("ufo").setup({
         provider_selector = function(bufnr, filetype, buftype)
@@ -207,10 +261,13 @@ return {
         end,
       })
     end,
-    -- stylua: ignore 
+    -- stylua: ignore
     keys = {
-      { "zR", function() require("ufo").openAllFolds() end },
-      { "zM", function() require("ufo").closeAllFolds() end },
+      { "zR", function() require("ufo").openAllFolds() end, desc = "Open all folds" },
+      { "zM", function() require("ufo").closeAllFolds() end, desc = "Close all folds" },
+      { "zr", function() require("ufo").openFoldsExceptKinds() end, desc = "Fold less" },
+      { "zm", function() require("ufo").closeFoldsWith() end, desc = "Fold more" },
+      { "zK", function() require("ufo").peekFoldedLinesUnderCursor() end, desc = "Peek fold" },
     },
   },
   {
@@ -240,34 +297,6 @@ return {
     event = "VimEnter",
   },
   {
-    "folke/persistence.nvim",
-    event = "BufReadPre", -- this will only start session saving when an actual file was opened
-    opts = {},
-    -- stylua: ignore
-    keys = {
-      { "<leader>qs", function() require("persistence").load() end, desc = "Load Session" },
-      { "<leader>qS", function() require("persistence").select() end, desc = "Select Session" },
-      { "<leader>ql", function() require("persistence").load({last = true}) end, desc = "Load Last Session" },
-      { "<leader>qd", function() require("persistence").stop() end, desc = "Stop session" },
-    },
-  },
-  { "stevearc/dressing.nvim", event = "VeryLazy" },
-  { "mechatroner/rainbow_csv", event = "BufEnter *.csv" },
-  { "brenoprata10/nvim-highlight-colors", opts = {}, event = "VeryLazy" },
-  {
-    "folke/flash.nvim",
-    event = "VeryLazy",
-    opts = {},
-    -- stylua: ignore
-    keys = {
-      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-      { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-      { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-      { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-      { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
-    },
-  },
-  {
     "rcarriga/nvim-notify",
     event = "VeryLazy",
     keys = {
@@ -293,6 +322,8 @@ return {
       end,
     },
   },
+  { "stevearc/dressing.nvim", event = "VeryLazy" },
+  { "brenoprata10/nvim-highlight-colors", opts = {}, event = "VeryLazy" },
   {
     "s1n7ax/nvim-window-picker",
     name = "window-picker",
@@ -303,41 +334,8 @@ return {
     end,
   },
   {
-    "stevearc/oil.nvim",
-    ---@module 'oil'
-    ---@type oil.SetupOpts
-    opts = {
-      default_file_explorer = false,
-    },
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-  },
-  {
-    "stevearc/quicker.nvim",
-    event = "FileType qf",
-    ---@module "quicker"
-    ---@type quicker.SetupOptions
-    opts = {
-      keys = {
-        {
-          ">",
-          function()
-            require("quicker").expand({ before = 2, after = 2, add_to_existing = true })
-          end,
-          desc = "Expand quickfix context",
-        },
-        {
-          "<",
-          function()
-            require("quicker").collapse()
-          end,
-          desc = "Collapse quickfix context",
-        },
-      },
-    },
-  },
-  {
     "OXY2DEV/helpview.nvim",
-    lazy = false, -- Recommended
+    ft = "help",
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
     },
@@ -353,11 +351,36 @@ return {
     },
   },
 
-  -- NOTE: Git / GitHub
-  { "tpope/vim-fugitive", cmd = { "G", "Git" } },
-  { "tpope/vim-rhubarb", cmd = { "GBrowse" } },
+  -- NOTE: Terminal
+  {
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    opts = {
+      open_mapping = [[<c-\>]],
+      direction = "float",
+    },
+    keys = { [[<c-\>]] },
+    cmd = {
+      "ToggleTerm",
+      "TermExec",
+      "ToggleTermToggleAll",
+      "ToggleTermSendCurrentLine",
+      "ToggleTermSendVisualLines",
+      "ToggleTermSendVisualSelection",
+    },
+  },
+
+  -- NOTE: Keybinding Help
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    opts = {},
+  },
+
+  -- NOTE: Git & GitHub
   {
     "lewis6991/gitsigns.nvim",
+    event = "BufReadPre",
     opts = {
       signs = {
         add = { text = "+" },
@@ -410,7 +433,12 @@ return {
       end,
     },
   },
+  { "tpope/vim-fugitive", cmd = { "G", "Git" } },
+  { "tpope/vim-rhubarb", cmd = { "GBrowse" }, dependencies = { "tpope/vim-fugitive" } },
   { "sindrets/diffview.nvim", cmd = { "DiffviewOpen", "DiffviewFileHistory" } },
+  { "wintermute-cell/gitignore.nvim", cmd = { "Gitignore" } },
+
+  -- NOTE: AI
   {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
@@ -434,5 +462,4 @@ return {
       },
     },
   },
-  { "wintermute-cell/gitignore.nvim", cmd = { "Gitignore" } },
 }

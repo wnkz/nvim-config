@@ -54,7 +54,6 @@ return {
       pcall(require("telescope").load_extension, "gh")
       pcall(require("telescope").load_extension, "file_browser")
       pcall(require("telescope").load_extension, "ui-select")
-      pcall(require("telescope").load_extension, "dap")
       pcall(require("telescope").load_extension, "grapple")
 
       local builtin = require("telescope.builtin")
@@ -95,7 +94,6 @@ return {
       end, { desc = "[S]earch [N]eovim files" })
     end,
     dependencies = {
-      { "nvim-telescope/telescope-dap.nvim" },
       { "nvim-telescope/telescope-file-browser.nvim" },
       { "nvim-telescope/telescope-frecency.nvim" },
       {

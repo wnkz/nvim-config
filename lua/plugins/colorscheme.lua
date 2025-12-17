@@ -5,6 +5,9 @@ return {
     lazy = false,
     opts = {},
     dev = true,
+    cond = function()
+      return vim.fn.isdirectory(vim.fn.expand("~/Developer/code/monoglow.nvim")) == 1
+    end,
   },
   {
     "navarasu/onedark.nvim",
