@@ -35,3 +35,55 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     vim.hl.on_yank()
   end,
 })
+
+vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
+  group = vim.api.nvim_create_augroup("no_undo_sensitive", { clear = true }),
+  pattern = {
+    -- System temporary directories
+    "/tmp/*",
+    "/private/tmp/*", -- macOS
+    "/var/tmp/*",
+    "/run/user/*/", -- Linux user runtime directories
+    "/dev/shm/*", -- RAM-backed tmpfs (used by pass, gopass)
+
+    -- Environment variable files
+    "*.env*", -- .env, .env.local, .env.production, etc.
+    "*/.env*", -- Environment files in subdirectories
+
+    -- SSH private keys
+    "*/.ssh/id_*", -- id_rsa, id_ed25519, id_ecdsa, id_dsa
+    "*/.ssh/*_key", -- Alternative private key naming
+
+    -- GPG/PGP private keys and encrypted files
+    "*/.gnupg/private-keys-v1.d/*", -- Private key storage
+    "*/.gnupg/secring.gpg", -- Legacy secret keyring
+    "*.gpg", -- GPG encrypted files
+    "*.asc", -- ASCII-armored encrypted files
+
+    -- Private key files (various formats and algorithms)
+    "*_rsa",
+    "*_rsa.*",
+    "*_ed25519",
+    "*_ed25519.*",
+    "*_ecdsa",
+    "*_ecdsa.*",
+    "*_dsa",
+    "*_dsa.*",
+    "*.pem",
+    "*.key",
+
+    -- Certificate archives and keystores (contain private keys)
+    "*.p12", -- PKCS#12 bundle (cert + private key)
+    "*.pfx", -- Windows PKCS#12
+    "*.keystore", -- Java KeyStore
+    "*.jks", -- Java KeyStore format
+    "*.truststore", -- Java TrustStore
+
+    -- Cloud provider credentials (specific files only)
+    "*/.aws/credentials", -- AWS access keys
+  },
+  desc = "Disable undofile for sensitive paths",
+  callback = function()
+    vim.bo.undofile = false
+  end,
+})
