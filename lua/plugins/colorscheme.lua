@@ -4,8 +4,7 @@ return {
     priority = 1000,
     lazy = false,
     opts = {},
-    dev = true,
-    cond = function()
+    dev = function()
       return vim.fn.isdirectory(vim.fn.expand("~/Developer/code/monoglow.nvim")) == 1
     end,
   },
