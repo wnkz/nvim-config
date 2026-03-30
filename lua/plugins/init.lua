@@ -153,14 +153,7 @@ return {
     },
   },
 
-  -- NOTE: Undo & History
-  {
-    "mbbill/undotree",
-    keys = {
-      { "<leader>u", vim.cmd.UndotreeToggle, desc = "Undo Tree" },
-    },
-    cmd = { "UndotreeToggle" },
-  },
+  -- NOTE: Undo & History removed mbbill/undotree, using built-in :Undotree (0.12)
 
   -- NOTE: Diagnostics & Quickfix
   {
