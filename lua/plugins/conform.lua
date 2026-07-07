@@ -17,6 +17,7 @@ return {
     local prettier_filetypes = { -- List of filetypes that should use Prettier
       "astro",
       "css",
+      "html",
       "javascript",
       "json",
       "jsonc",
@@ -30,10 +31,10 @@ return {
     local formatters_by_ft = {
       c = { "clang_format" },
       lua = { "stylua" },
-      python = { "ruff_organize_imports", "ruff_format" },
+      python = { "ruff_format", "ruff_organize_imports" },
       rust = { "rustfmt" },
       sh = { "shfmt" },
-      sql = { "sqlfluff" },
+      -- sql = { "sqlfluff" },
       terraform = { "terraform_fmt" },
       hcl = { "packer_fmt" },
       zig = { "zigfmt" },
