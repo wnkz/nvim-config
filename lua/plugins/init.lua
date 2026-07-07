@@ -430,29 +430,4 @@ return {
   { "tpope/vim-rhubarb", cmd = { "GBrowse" }, dependencies = { "tpope/vim-fugitive" } },
   { "sindrets/diffview.nvim", cmd = { "DiffviewOpen", "DiffviewFileHistory" } },
   { "wintermute-cell/gitignore.nvim", cmd = { "Gitignore" } },
-
-  -- NOTE: AI
-  {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "InsertEnter",
-    opts = {
-      suggestion = {
-        enabled = true,
-        auto_trigger = true,
-        keymap = {
-          accept = "<M-Tab>",
-          accept_word = "<M-w>",
-          accept_line = "<M-l>",
-          next = "<M-]>",
-          prev = "<M-[>",
-          dismiss = "<C-]>",
-        },
-      },
-      panel = {
-        enabled = true,
-        auto_refresh = false,
-      },
-    },
-  },
 }
